@@ -29,36 +29,45 @@
         <nav class="navbar navbar-dark bg-navbar fixed-top shadow-sm py-2">
             <div class="container-fluid flex-column">
 
-                <div class="d-flex w-100 align-items-center justify-content-between flex-wrap">
+                <div class="d-flex align-items-center justify-content-between flex-wrap mx-lg-auto w-98">
 
-                    <a href="index.html" class="d-flex align-items-center text-decoration-none">
+                    <!-- Pantalla grande -->
+                    <a href="index.html" class="d-none d-lg-flex align-items-center text-decoration-none">
                         <img src="/img/logo.png" alt="Logo" class="logo me-2">
+                        <span class="navbar-brand mb-0">SteamView</span>
                     </a>
 
-                    <a href="index.html" class="navbar-brand m-0 text-decoration-none d-none d-lg-block">SteamView</a>
-                    <a href="index.html" class="navbar-brand m-0 text-center text-decoration-none d-block d-lg-none">SteamView</a>
+                    <form class="d-none d-lg-flex ms-auto" role="search">
+                        <input class="form-control form-control-sm me-2" type="search" placeholder="Buscar juegos..." aria-label="Buscar">
+                        <button class="btn btn-outline-light btn-sm" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
 
-                    <div class="d-flex align-items-center">
+                    <!-- Pantalla chica -->
+                    <div class="d-flex d-lg-none w-100 align-items-center justify-content-between">
                         
-                        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                        <a href="index.html" class="text-decoration-none">
+                            <img src="/img/logo.png" alt="Logo" class="logo me-2">
+                        </a>
+
+                        <a href="index.html" class="navbar-brand mb-0 mx-auto text-center">SteamView</a>
+
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-
-                        <form class="d-none d-lg-flex ms-3" role="search">
-                            <input class="form-control form-control-sm me-2" type="search" placeholder="Buscar juegos..." aria-label="Buscar">
-                            <button class="btn btn-outline-light btn-sm" type="submit"><i class="fas fa-search"></i></button>
-                        </form>
                     </div>
+
                 </div>
 
+                <!-- Enlaces pantalla grande -->
                 <ul class="navbar-nav w-100 d-none d-lg-flex flex-row justify-content-center mt-2">
                     <li class="nav-item mx-2"><a class="nav-link" href="explorar.html">Explorar</a></li>
                     <li class="nav-item mx-2"><a class="nav-link" href="categorias.html">Categorías</a></li>
                     <li class="nav-item mx-2"><a class="nav-link" href="top.html">Top Juegos</a></li>
                     <li class="nav-item mx-2"><a class="nav-link" href="noticias.html">Noticias</a></li>
                 </ul>
-                
+
+                <!-- Menú colapsado -->
                 <div class="collapse navbar-collapse w-100 mt-2 d-lg-none" id="navbarCollapse">
                     
                     <form class="d-flex mb-3" role="search">
@@ -73,7 +82,6 @@
                         <li class="nav-item"><a class="nav-link" href="noticias.html">Noticias</a></li>
                     </ul>
                 </div>
-
             </div>
         </nav>
 

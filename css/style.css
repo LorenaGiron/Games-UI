@@ -64,6 +64,11 @@ main
     transform: scaleX(1.1);
 }
 
+.w-98 
+{
+    width: 98%;
+}
+
 /* Footer */
 footer 
 {
