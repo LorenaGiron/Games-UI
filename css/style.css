@@ -16,7 +16,7 @@ body
     color: var(--gris);
     transition: background-color 0.5s ease, color 0.5s ease;
     margin: 0;
-    padding: 0;
+    padding-top: 100px;
     height: 100%;
 }
 
@@ -39,7 +39,7 @@ main
     font-weight: bold;
 }
 
-.navbar 
+.bg-navbar 
 {
     background-color: var(--oscuro);
 }
@@ -48,7 +48,20 @@ main
 {
     width: 35px;
     height: 35px;
-    margin-right: 10px;
+}
+
+.nav-link 
+{
+    color: var(--gris);
+    transition: color 0.3s ease;
+    text-align: center;
+    padding: 10px;
+}
+
+.nav-link:hover 
+{
+    color: white;
+    transform: scaleX(1.1);
 }
 
 /* Footer */
