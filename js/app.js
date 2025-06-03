@@ -65,8 +65,8 @@ async function cargarJuegos() {
         <img src="${juego.image}" class="card-img-top" alt="${juego.name}">
         <div class="card-body">
           <h5 class="card-title">${juego.name}</h5>
-          <p class="card-text">Precio: ${juego.price}</p>
-           <a href="./detalles.html" class="btn btn-outline-light btn-sm" onclick="guardarID('${juego.id}')">Ver detalles</a>
+          <p class="card-text">Price: ${juego.price}</p>
+           <a href="./detalles.html" class="btn btn-outline-light btn-sm" onclick="guardarID('${juego.id}')">Details</a>
         </div>
       </div>
     `;
