@@ -23,6 +23,12 @@
     background-color: var(--claro);
     color: var(--oscuro);
 }
+
+.accordion-container a.accordion 
+{
+    text-decoration: none !important;     
+}
+
 .screenshot{
     justify-content: center;
 }
