@@ -85,22 +85,5 @@ document.addEventListener("DOMContentLoaded", () =>
             panel.style.display = panel.style.display === "block" ? "none" : "block";
         });
     });
-        
-        const contenedorAcordeones = document.querySelector(".accordion-container");
-
-        if (contenedorAcordeones) 
-        {
-            const botonNoticias = document.createElement("a"); 
-            botonNoticias.className = "accordion d-block text-start"; 
-            botonNoticias.href = "noticias.html";
-            botonNoticias.innerHTML = `News <i class="fas fa-arrow-right float-end"></i>`;
-
-            botonNoticias.addEventListener("click", (e) => 
-            {
-                e.stopPropagation(); 
-            });
-
-            contenedorAcordeones.appendChild(botonNoticias);
-        }
 
 });
