@@ -70,3 +70,32 @@
     box-shadow: 0 4px 20px rgba(255,255,255,0.2);
 }
 
+.reviews-container {
+    max-height: 400px;
+    overflow-y: auto;
+    width: 100%;
+   
+    border-radius: 12px;
+    padding: 20px;
+ 
+    scrollbar-width:auto;
+    scrollbar-color: var(--medio) var(--fuerte);
+}
+.review {
+    background-color: var(--fuerte);
+     color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review:hover {
+    transform: scale(1.03);
+   
+    cursor: pointer;
+}
+
+.title{
+    color: white;
+}
