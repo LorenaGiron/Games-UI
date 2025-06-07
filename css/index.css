@@ -112,15 +112,12 @@ padding-bottom: 100px;
 }
 
 .arrow:hover {
-  color: #00ffff; /* Efecto neón al pasar el ratón */
+    color: var(--claro);
   transform: scale(1.2); /* Zoom leve al pasar */
 }
 
 
-.arrow:hover {
 
-  color: #000; 
-}
 
 .arrow.left { 
   left: 15px; 
