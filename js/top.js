@@ -4,6 +4,7 @@ const today = new Date();
 const oneMonthAgo = new Date();
 oneMonthAgo.setMonth(today.getMonth() - 1);
 const formatDate = date => date.toISOString().split('T')[0];
+let searchTerm = "";
 
 const startDate = formatDate(oneMonthAgo);
 const endDate = formatDate(today);
@@ -128,6 +129,10 @@ async function loadGames() {
 
                     container.innerHTML += cardHTML;
                 }
+
+                const extraInfo = section.displayFields(game);
+                const cardHTML = createGameCard(game, extraInfo);
+                container.innerHTML += cardHTML;
             });
 
             // Oculta secciones vacías si hay búsqueda
