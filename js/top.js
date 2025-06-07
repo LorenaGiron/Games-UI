@@ -80,9 +80,9 @@ function createGameCard(game, contentHTML) {
                 <h5 class="card-title">${game.name}</h5>
                 ${contentHTML}
             </div>
-            <button class="btn btn-primary mt-3" onclick="showGameInfoById(${game.id}, '${game.name.replace(/'/g, "\\'")}')">
-                Ver info
-            </button>
+                <button class="btn btn-primary mt-3" onclick="window.location.href='detallesTop.html?id=${game.id}'">
+                    Ver info
+                </button>
             </div>
         </div>
         </div>
