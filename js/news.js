@@ -156,3 +156,141 @@ document.getElementById('author-filter').addEventListener('change', applyFilters
 document.getElementById('date-filter').addEventListener('change', applyFilters);
 
 fetchNews();
+
+/* Partículas */
+document.addEventListener('DOMContentLoaded', function() {
+  const container = document.getElementById('particleContainer');
+  const particleCount = 150; // Ajusta la cantidad de partículas
+  
+  // Colores para las partículas
+  const colors = [
+    'rgba(255, 255, 255, 0.7)',  // Blanco
+    'rgba(100, 200, 255, 0.7)',  // Azul claro
+    'rgba(255, 100, 200, 0.7)',  // Rosa
+    'rgba(100, 255, 200, 0.7)'   // Verde agua
+  ];
+
+  // Crear partículas
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    // Tamaño aleatorio entre 1px y 4px
+    const size = Math.random() * 3 + 1;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    
+    // Posición aleatoria
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.top = `${Math.random() * 100}%`;
+    
+    // Opacidad aleatoria
+    const opacity = Math.random() * 0.6 + 0.1;
+    particle.style.opacity = opacity;
+    
+    // Color aleatorio
+    particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+    
+    // Animación flotante básica
+    particle.style.transform = `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`;
+    
+    container.appendChild(particle);
+  }
+  
+  // Función para hacer brillar partículas aleatorias
+  function randomGlow() {
+    const particles = document.querySelectorAll('.particle');
+    const visibleParticles = Array.from(particles).filter(p => {
+      const rect = p.getBoundingClientRect();
+      return (
+        rect.top < window.innerHeight &&
+        rect.bottom > 0 &&
+        rect.left < window.innerWidth &&
+        rect.right > 0
+      );
+    });
+    
+    if (visibleParticles.length > 0) {
+      const randomIndex = Math.floor(Math.random() * visibleParticles.length);
+      const particle = visibleParticles[randomIndex];
+      
+      particle.classList.add('glow');
+      
+      // Tiempo de brillo aleatorio entre 0.5s y 1.5s
+      const glowTime = Math.random() * 1000 + 500;
+      
+      setTimeout(() => {
+        particle.classList.remove('glow');
+      }, glowTime);
+    }
+  }
+  
+  // Activar brillo aleatorio cada 200-500ms
+  setInterval(randomGlow, Math.random() * 300 + 200);
+});
+
+/* Brillo del Logo*/
+window.addEventListener('scroll', () => {
+  const navbar = document.querySelector('.navbar');
+  const scrollY = window.scrollY;
+  
+  navbar.style.backdropFilter = `blur(${Math.min(12, scrollY / 10)}px)`;
+  navbar.style.webkitBackdropFilter = `blur(${Math.min(12, scrollY / 10)}px)`;
+});
+
+
+/* COMETA */
+const cometConfig = {
+  minCount: 7,      // Mínimo de cometas simultáneas
+  maxCount: 17,      // Máximo de cometas simultáneas
+  minDelay: 20000,  // Tiempo mínimo entre grupos (ms)
+  maxDelay: 20000,  // Tiempo máximo entre grupos
+  minSpeed: 6,      // Animación más lenta (s)
+  maxSpeed: 10,     // Animación más rápida (s)
+  colors: [         // Colores personalizados
+    'rgba(102, 126, 234, 0.8)',  // Azul brand
+    'rgba(118, 75, 162, 0.8)',   // Violeta brand
+    'rgba(255, 154, 158, 0.8)',  // Rosa/accent
+    'rgba(255, 255, 255, 0.8)'   // Blanco
+  ]
+};
+
+function createAdvancedShootingStars() {
+  const container = document.querySelector('.shooting-stars');
+  container.innerHTML = '';
+  
+  const count = Math.floor(Math.random() * (cometConfig.maxCount - cometConfig.minCount + 1)) + cometConfig.minCount;
+  
+  for (let i = 0; i < count; i++) {
+    const comet = document.createElement('div');
+    comet.className = 'shooting-star';
+    
+    // Configuración aleatoria
+    const topPos = Math.random() * 80 + 10;
+    const delay = Math.random() * 10;
+    const length = Math.random() * 100 + 50;
+    const speed = Math.random() * (cometConfig.maxSpeed - cometConfig.minSpeed) + cometConfig.minSpeed;
+    const color = cometConfig.colors[Math.floor(Math.random() * cometConfig.colors.length)];
+    
+    // Aplicar estilos
+    comet.style.cssText = `
+      top: ${topPos}%;
+      animation-delay: ${delay}s;
+      animation-duration: ${speed}s;
+      width: ${length}px;
+      background: linear-gradient(90deg, transparent, ${color});
+    `;
+    
+    container.appendChild(comet);
+  }
+  
+  // Siguiente grupo de cometas
+  const nextDelay = Math.random() * (cometConfig.maxDelay - cometConfig.minDelay) + cometConfig.minDelay;
+  setTimeout(createAdvancedShootingStars, nextDelay);
+}
+
+// Inicialización
+document.addEventListener('DOMContentLoaded', () => {
+  // Primera ejecución después de 3s
+  setTimeout(createAdvancedShootingStars, 3000);
+});
