@@ -91,7 +91,6 @@ function createGameCard(game, contentHTML) {
 
 // Cargar y renderizar juegos en cada sección
 async function loadGames() {
-    const searchTerm = localStorage.getItem("searchTerm")?.toLowerCase();
 
     for (const section of sections) {
         try {
@@ -114,51 +113,16 @@ async function loadGames() {
 
                 const gameName = game.name.toLowerCase();
 
-                if (!searchTerm || gameName.includes(searchTerm)) {
-                    const extraInfo = section.displayFields(game);
-
-                    // Agregamos texto indicando a qué grupo pertenece si hay búsqueda
-                    let cardHTML = createGameCard(game, extraInfo);
-                    if (searchTerm) {
-                        cardHTML = cardHTML.replace(
-                        '<div class="card-body d-flex flex-column justify-content-between">',
-                        `<div class="card-body d-flex flex-column justify-content-between">
-                            <p class="badge bg-info mb-2">Grupo: ${section.title}</p>`
-                        );
-                    }
-
-                    container.innerHTML += cardHTML;
-                }
+                const extraInfo = section.displayFields(game);
+                const cardHTML = createGameCard(game, extraInfo);
+                container.innerHTML += cardHTML;
             });
-
-            // Oculta secciones vacías si hay búsqueda
-            if (searchTerm && container.innerHTML.trim() === "") {
-                document.getElementById(section.elementId).previousElementSibling.style.display = "none";
-            }
 
         } catch (err) {
             console.error(`Error cargando juegos para ${section.title}:`, err);
         }
     }
-
-    // Limpia búsqueda tras mostrar
-    if (localStorage.getItem("searchTerm")) {
-        localStorage.removeItem("searchTerm");
-    }
-
 }
-
-document.getElementById("searchInput").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        document.getElementById("searchButton").click();
-    }
-});
-
-document.getElementById("searchButton").addEventListener("click", () => {
-    const term = document.getElementById("searchInput").value.trim();
-    localStorage.setItem("searchTerm", term);
-    location.reload(); // recarga para filtrar
-});
 
 document.addEventListener("DOMContentLoaded", loadGames);
 

@@ -1,7 +1,6 @@
-document.addEventListener('DOMContentLoaded', async () => {
+async function renderGenres() {
     const url = 'https://games-details.p.rapidapi.com/gameinfo/single_game/730';
-    const options = 
-    {
+    const options = {
         method: 'GET',
         headers: {
             'x-rapidapi-key': 'fa076bb285msh7695b9780cdfbd3p1efd96jsn61537f61b091',
@@ -9,11 +8,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
 
-    // Íconos personalizados por género
-    function getGenreIcon(genre) 
-    {
-        const icons = 
-        {
+    function getGenreIcon(genre) {
+        const icons = {
             "FPS": "fas fa-bullseye",
             "Shooter": "fas fa-crosshairs",
             "Multiplayer": "fas fa-users",
@@ -36,15 +32,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             "Moddable": "fas fa-tools",
             default: "fas fa-gamepad"
         };
-
         return icons[genre] || icons.default;
     }
 
-    // Colores de la paleta :root
     const customColors = ['var(--medio)', 'var(--fuerte)', 'var(--claro)','var(--gris)','var(--grisMedio)'];
 
-    try 
-    {
+    try {
         const response = await fetch(url, options);
         const data = await response.json();
         const gameDetails = data.data;
@@ -55,14 +48,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         const genresContainer = document.getElementById('genres-list');
-        genresContainer.innerHTML = `
-            <h2 class="mb-5 mt-5 text-center text-light">Game Genres</h2>
-        `;
+        genresContainer.innerHTML = `<h2 class="mb-5 mt-5 text-center text-light">Game Genres</h2>`;
         const row = document.createElement('div');
         row.className = 'row g-4';
 
-        gameDetails.tags.forEach((genre, index) => 
-        {
+        gameDetails.tags.forEach((genre, index) => {
             const col = document.createElement('div');
             col.className = 'col-11 col-sm-6 col-md-4 col-lg-3';
 
@@ -76,18 +66,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             const cardTitle = document.createElement('h5');
             cardTitle.className = 'card-title mb-0 text-light';
 
-            // Crear enlace que guarda en localStorage y redirige
             const link = document.createElement('a');
-            link.href = 'genre.html'; // Página destino
+            link.href = 'genre.html';
             link.className = 'text-decoration-none text-light';
-            link.onclick = (e) => 
-            {
+            link.onclick = (e) => {
                 e.preventDefault();
-                localStorage.setItem('selectedGenre', genre); 
+                localStorage.setItem('selectedGenre', genre);
                 window.location.href = 'genero.html';
             };
 
-            // Ícono
             const icon = document.createElement('i');
             icon.className = getGenreIcon(genre) + ' me-2';
 
@@ -102,34 +89,38 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         genresContainer.appendChild(row);
 
-        const observer = new IntersectionObserver(entries => 
-        {
-            entries.forEach(entry => 
-            {
-                if (entry.isIntersecting) 
-                {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.genre-card').forEach(card => observer.observe(card));
-    }
-    catch (error) 
-    {
+
+    } catch (error) {
         console.error('Error al obtener los detalles del juego:', error);
     }
-});
+}
 
+// Llamada inicial
+document.addEventListener('DOMContentLoaded', renderGenres);
+
+// Exporta para uso externo
+window.renderGenres = renderGenres;
+
+/*
+// Busqueda -----------------------------------------------------------------------
 const searchForm = document.querySelector('form[role="search"]');
 const searchInput = searchForm.querySelector('input[type="search"]');
 const genresList = document.getElementById('genres-list');
+const backButton = document.getElementById('back-button');
+const originalContent = genresList.innerHTML; // Guarda el contenido inicial
 
-
-
-// Busqueda 
+// API config
 const urlBase = 'https://games-details.p.rapidapi.com/search?sugg=';
-const options1 = {
+const options = {
     method: 'GET',
     headers: {
         'x-rapidapi-key': 'fa076bb285msh7695b9780cdfbd3p1efd96jsn61537f61b091',
@@ -139,7 +130,7 @@ const options1 = {
 
 async function searchGames(query) {
     try {
-        const response = await fetch(`${urlBase}${encodeURIComponent(query)}`, options1);
+        const response = await fetch(`${urlBase}${encodeURIComponent(query)}`, options);
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -151,6 +142,7 @@ async function searchGames(query) {
         const games = data.data.search;
 
         genresList.innerHTML = ''; // Limpiar resultados anteriores
+        backButton.style.display = 'inline-block';
 
         if (!games || games.length === 0) {
             genresList.innerHTML = '<p class="text-center mt-4">No results found.</p>';
@@ -191,3 +183,16 @@ searchForm.addEventListener('submit', function (e) {
         searchGames(query);
     }
 });
+
+backButton.addEventListener('click', () => {
+    searchInput.value = '';
+    genresList.innerHTML = '';
+    backButton.style.display = 'none';
+
+    if (typeof window.renderGenres === 'function') {
+        window.renderGenres();  // Vuelve a cargar los géneros
+    } else {
+        console.error('renderGenres no está disponible');
+    }
+});
+*/
