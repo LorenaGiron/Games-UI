@@ -71,22 +71,22 @@ const sections = [
 
 // Tarjeta de juego dinámica
 function createGameCard(game, contentHTML) {
-  return `
-    <div class="col-md-3 mb-4">
-      <div class="card h-100 shadow-sm">
-        <img src="${game.background_image}" class="card-img-top" alt="${game.name}">
-        <div class="card-body d-flex flex-column justify-content-between">
-          <div>
-            <h5 class="card-title">${game.name}</h5>
-            ${contentHTML}
-          </div>
-          <button class="btn btn-primary mt-3" onclick="showGameInfoById(${game.id}, '${game.name.replace(/'/g, "\\'")}')">
-            Ver info
-          </button>
+    return `
+        <div class="col-md-3 mb-4">
+        <div class="card h-100 shadow-sm">
+            <img src="${game.background_image}" class="card-img-top" alt="${game.name}">
+            <div class="card-body d-flex flex-column justify-content-between">
+            <div>
+                <h5 class="card-title">${game.name}</h5>
+                ${contentHTML}
+            </div>
+            <button class="btn btn-primary mt-3" onclick="showGameInfoById(${game.id}, '${game.name.replace(/'/g, "\\'")}')">
+                Ver info
+            </button>
+            </div>
         </div>
-      </div>
-    </div>
-  `;
+        </div>
+    `;
 }
 
 // Cargar y renderizar juegos en cada sección
@@ -149,15 +149,15 @@ async function loadGames() {
 }
 
 document.getElementById("searchInput").addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    document.getElementById("searchButton").click();
-  }
+    if (e.key === "Enter") {
+        document.getElementById("searchButton").click();
+    }
 });
 
 document.getElementById("searchButton").addEventListener("click", () => {
-  const term = document.getElementById("searchInput").value.trim();
-  localStorage.setItem("searchTerm", term);
-  location.reload(); // recarga para filtrar
+    const term = document.getElementById("searchInput").value.trim();
+    localStorage.setItem("searchTerm", term);
+    location.reload(); // recarga para filtrar
 });
 
 document.addEventListener("DOMContentLoaded", loadGames);
