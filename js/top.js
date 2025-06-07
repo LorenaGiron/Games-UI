@@ -74,18 +74,18 @@ const sections = [
 function createGameCard(game, contentHTML) {
     return `
         <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm">
-                <img src="${game.background_image}" class="card-img-top" alt="${game.name}">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <div>
-                        <h5 class="card-title">${game.name}</h5>
-                        ${contentHTML}
-                    </div>
-                    <a href="#" class="top-link mt-3 p-0 text-decoration-none" onclick="showGameInfoById(${game.id}, '${game.name.replace(/'/g, "\\'")}')">
-                        See info
-                    </a>
-                </div>
+        <div class="card h-100 shadow-sm">
+            <img src="${game.background_image}" class="card-img-top" alt="${game.name}">
+            <div class="card-body d-flex flex-column justify-content-between">
+            <div>
+                <h5 class="card-title">${game.name}</h5>
+                ${contentHTML}
             </div>
+                <button class="btn btn-primary mt-3" onclick="window.location.href='detallesTop.html?id=${game.id}'">
+                    See info
+                </button>       
+            </div>
+        </div>
         </div>
     `;
 }

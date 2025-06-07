@@ -147,3 +147,15 @@ h2
 {
   background-color: transparent;
 }
+
+.btn.btn-primary.mt-3 {
+    background-color: #373737; /* Fondo gris oscuro */
+    border: 2px solid white;   /* Borde blanco */
+    color: white;              /* Texto blanco */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn.btn-primary.mt-3:hover {
+    background-color: white;  /* Fondo blanco al hacer hover */
+    color: #373737;           /* Texto gris oscuro para contraste */
+}
