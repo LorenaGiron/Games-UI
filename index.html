@@ -21,7 +21,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
+
 <body id="top">
+    <div id="background-grid"></div>
     
     <!-- Menú de navegación -->
     <header>
@@ -56,16 +58,16 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                     </div>
-
                 </div>
 
                 <!-- Enlaces pantalla grande -->
                 <ul class="navbar-nav w-100 d-none d-lg-flex flex-row justify-content-center mt-2">
-                    <li class="nav-item mx-2"><a class="nav-link" href="categorias.html">Categories</a></li>
-                    <li class="nav-item mx-2"><a class="nav-link" href="top.html">Top Games</a></li>
-                    <li class="nav-item mx-2"><a class="nav-link" href="noticias.html">News</a></li>
-                    <li class="nav-item mx-2"><a class="nav-link" href="videos.html">Game Plays</a></li>
- 
+
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="categorias.html">Categories</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="top.html">Top Games</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="noticias.html">News</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="videos.html">Game Plays</a></li>
+
                 </ul>
 
                 <!-- Menú colapsado -->
@@ -77,36 +79,51 @@
                     </form>
 
                     <ul class="navbar-nav w-100 d-flex flex-column align-items-center">
-                    <li class="nav-item mx-2"><a class="nav-link" href="categorias.html">Categories</a></li>
-                    <li class="nav-item mx-2"><a class="nav-link" href="top.html">Top Games</a></li>
-                    <li class="nav-item mx-2"><a class="nav-link" href="noticias.html">News</a></li>
-                    <li class="nav-item mx-2"><a class="nav-link" href="videos.html">Game Plays</a></li>
+
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="categorias.html">Categories</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="top.html">Top Games</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="noticias.html">News</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="videos.html">Game Plays</a></li>
 
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <div class="container mt-5 pt-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="text-center">Welcome to Mr.Games</h1>
-                    <p class="text-center">Your portal to discover the best games.</p>
-                </div>
+        <div class="collage-background">
+            <div class="collage-images" id="collage-container">
+                <!-- Las imágenes se insertan desde JS -->
+            </div>
+            <div class="welcome-text">
+                <h1>Welcome to Mr.Games</h1>
+                <p>Your portal to discover the best games.</p>
             </div>
         </div>
     </header>
 
     <!-- Contenido principal --> 
-    <div class="content">
-        
-        <main class="container my-5">
-
-            <section class="mb-5">
-                <h2 class="mb-4">Trending Games</h2>
-                <div class="row g-3" id="populares-container">
+    <section class="particle-container" id="particleContainer">
+        <div class="content">
+            <section class="mb-5 trending-section">
+                <div class="carousel-container position-relative">
+                    <h2 class="mb-4">Trending Games</h2>
+                    <button class="arrow left">&#8249;</button>
+                    <div class="carousel" id="populares-container"></div>
+                    <button class="arrow right">&#8250;</button>
                 </div>
             </section>
+
+            <section class="mb-5 more-section">
+                <div class="carousel-container position-relative">
+                    <h2 class="mb-4">More Games For U</h2>
+                    <button class="arrow left" id="arrow-left-more">&#8249;</button>
+                    <div class="carousel" id="recomendados-container"></div>
+                    <button class="arrow right" id="arrow-right-more">&#8250;</button>
+                </div>
+            </section>
+        </div>
+    </section>
+
         </main>
 
         <!-- Footer -->
