@@ -3,7 +3,7 @@ const options = {
 
 	method: 'GET',
 	headers: {
-		'x-rapidapi-key': '57430afaa8msh1aa614aaa240bb5p1bb6eejsnad26a81269a2',
+		'x-rapidapi-key': 'fa076bb285msh7695b9780cdfbd3p1efd96jsn61537f61b091',
 		'x-rapidapi-host': 'games-details.p.rapidapi.com'
 	}
 
@@ -250,3 +250,152 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+const API_URL = 'https://games-details.p.rapidapi.com/search?sugg=';
+const options2 = {
+    method: 'GET',
+    headers: {
+        'x-rapidapi-key': 'fa076bb285msh7695b9780cdfbd3p1efd96jsn61537f61b091',
+        'x-rapidapi-host': 'games-details.p.rapidapi.com'
+    }
+};
+
+let contenidoOriginal = null; // Guardamos la vista inicial
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Guardamos el contenido original una vez cargado
+    const particleContainer = document.getElementById('particleContainer');
+    if (particleContainer) {
+        contenidoOriginal = particleContainer.cloneNode(true);
+    }
+
+    const searchForms = document.querySelectorAll('form[role="search"]');
+    searchForms.forEach(form => {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const input = form.querySelector('input[type="search"]');
+            const query = input.value.trim();
+            if (query) {
+                await buscarJuegos(query);
+            }
+        });
+    });
+});
+
+async function buscarJuegos(query) {
+    try {
+        const response = await fetch(API_URL + encodeURIComponent(query), options2);
+        const data = await response.json();
+
+        if (!data || !Array.isArray(data) || data.length === 0) {
+            mostrarMensaje("No games found for your search.");
+            return;
+        }
+
+        mostrarResultados(data);
+    } catch (error) {
+        console.error("Error fetching games:", error);
+        mostrarMensaje("There was an error fetching the game data.");
+    }
+}
+
+function mostrarResultados(juegos) {
+    // Eliminar sección principal
+    const particleContainer = document.getElementById('particleContainer');
+    if (particleContainer) {
+        particleContainer.remove();
+    }
+
+    const oldResults = document.getElementById('resultados-busqueda');
+    if (oldResults) oldResults.remove();
+
+    const section = document.createElement('section');
+    section.id = 'resultados-busqueda';
+    section.classList.add('container', 'my-5');
+
+    const heading = document.createElement('h2');
+    heading.textContent = "Search Results";
+    heading.classList.add('mb-4');
+    section.appendChild(heading);
+
+    const grid = document.createElement('div');
+    grid.classList.add('row', 'g-4');
+
+    juegos.forEach(juego => {
+        const col = document.createElement('div');
+        col.classList.add('col-12', 'col-sm-6', 'col-md-4', 'col-lg-3');
+
+        const card = document.createElement('div');
+        card.classList.add('card', 'h-100', 'shadow');
+
+        const img = document.createElement('img');
+        img.src = juego.image;
+        img.classList.add('card-img-top');
+        img.alt = juego.name;
+
+        const cardBody = document.createElement('div');
+        cardBody.classList.add('card-body');
+
+        const title = document.createElement('h5');
+        title.classList.add('card-title');
+        title.textContent = juego.name;
+
+        const price = document.createElement('p');
+        price.classList.add('card-text', 'text-muted');
+        price.textContent = juego.price || "Price not available";
+
+        cardBody.appendChild(title);
+        cardBody.appendChild(price);
+        card.appendChild(img);
+        card.appendChild(cardBody);
+        col.appendChild(card);
+        grid.appendChild(col);
+    });
+
+    section.appendChild(grid);
+
+    // Botón para volver al inicio
+    const volverBtn = document.createElement('button');
+    volverBtn.textContent = "← Back to home";
+    volverBtn.classList.add('btn', 'btn-outline-primary', 'mt-4');
+    volverBtn.addEventListener('click', restaurarVistaOriginal);
+    section.appendChild(volverBtn);
+
+    document.body.insertBefore(section, document.querySelector('footer'));
+}
+
+function mostrarMensaje(mensaje) {
+    const oldResults = document.getElementById('resultados-busqueda');
+    if (oldResults) oldResults.remove();
+
+    const section = document.createElement('section');
+    section.id = 'resultados-busqueda';
+    section.classList.add('container', 'my-5', 'text-center');
+
+    const msg = document.createElement('p');
+    msg.textContent = mensaje;
+    msg.classList.add('lead');
+
+    const volverBtn = document.createElement('button');
+    volverBtn.textContent = "← Back to home";
+    volverBtn.classList.add('btn', 'btn-outline-secondary', 'mt-4');
+    volverBtn.addEventListener('click', restaurarVistaOriginal);
+
+    section.appendChild(msg);
+    section.appendChild(volverBtn);
+
+    document.body.insertBefore(section, document.querySelector('footer'));
+}
+
+function restaurarVistaOriginal() {
+    const resultados = document.getElementById('resultados-busqueda');
+    if (resultados) resultados.remove();
+
+    if (contenidoOriginal) {
+        document.body.insertBefore(contenidoOriginal.cloneNode(true), document.querySelector('footer'));
+    }
+
+    // Opcional: limpiar campos de búsqueda
+    const searchInputs = document.querySelectorAll('input[type="search"]');
+    searchInputs.forEach(input => input.value = "");
+}
