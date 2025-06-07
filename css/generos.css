@@ -14,3 +14,39 @@
     transition: all 0.3s ease-in-out;
     box-shadow: 0 4px 20px rgba(255,255,255,0.2);
 }
+#genre-results button#shuffle-btn {
+  width: 70px;
+  height: 70px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--claro);       /* borde color medio */
+  background-color: var(--medio);      /* fondo color fuerte */
+  color: var(--gris);                   /* texto gris claro */
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto 0 auto;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+  animation: pulseScale 2.5s ease-in-out infinite;
+}
+
+#genre-results button#shuffle-btn:hover {
+  background-color: var(--claro);   /* fondo color medio */
+  color: var(--grisOscuro);          /* texto gris oscuro */
+  border-color: var(--medio);
+  animation-play-state: paused;      /* pausa animación al hacer hover */
+}
+
+/* Animación que escala el botón */
+@keyframes pulseScale {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(219, 221, 223, 0); /* sin sombra */
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.7); /* sombra suave azulada */
+  }
+}

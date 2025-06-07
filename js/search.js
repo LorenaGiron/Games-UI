@@ -25,7 +25,7 @@ searchForms.forEach(form => {
         const options = {
             method: 'GET',
             headers: {
-                'x-rapidapi-key': 'fa076bb285msh7695b9780cdfbd3p1efd96jsn61537f61b091',
+            'x-rapidapi-key': '0272d01fe9mshf576bfdf1ca2482p13f58bjsnbc5c66037bba',
                 'x-rapidapi-host': 'games-details.p.rapidapi.com'
             }
         };
@@ -77,6 +77,7 @@ function renderResults(games) {
         item.addEventListener('click', () => {
             localStorage.setItem('juegoID', game.id);
             window.location.href = 'detalles.html';
+            console.log('Juego seleccionado:', game.id);
         });
 
         resultContainer.appendChild(item);
