@@ -38,7 +38,7 @@
                     </a>
 
                     <form class="d-none d-lg-flex ms-auto" role="search">
-                        <input class="form-control form-control-sm me-2" type="search" placeholder="Buscar juegos..." aria-label="Buscar">
+                        <input class="form-control form-control-sm me-2" type="search" placeholder="Search games..." aria-label="Buscar">
                         <button class="btn btn-outline-light btn-sm" type="submit"><i class="fas fa-search"></i></button>
                     </form>
 
@@ -61,6 +61,7 @@
 
                 <!-- Enlaces pantalla grande -->
                 <ul class="navbar-nav w-100 d-none d-lg-flex flex-row justify-content-center mt-2">
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="index.html">Explore</a></li>
                     <li class="nav-item mx-2"><a class="nav-link" href="categorias.html">Categories</a></li>
                     <li class="nav-item mx-2"><a class="nav-link" href="top.html">Top Games</a></li>
                     <li class="nav-item mx-2"><a class="nav-link" href="noticias.html">News</a></li>
@@ -75,6 +76,7 @@
                     </form>
 
                     <ul class="navbar-nav w-100 d-flex flex-column align-items-center">
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="index.html">Explore</a></li>   
                     <li class="nav-item mx-2"><a class="nav-link" href="categorias.html">Categories</a></li>
                     <li class="nav-item mx-2"><a class="nav-link" href="top.html">Top Games</a></li>
                     <li class="nav-item mx-2"><a class="nav-link" href="noticias.html">News</a></li>
@@ -83,20 +85,24 @@
             </div>
         </nav>
 
-       
+        <div class="container mt-5 pt-3">
+            <div class="row">
+                <div class="col-md-12">
+                  
+                </div>
+            </div>
+        </div>
     </header>
+    <br>
+    <br>
 
-
-                <div id="videos" class="video-container"></div>
 
     <!-- Contenido principal --> 
     <div class="content">
-        
-        
-
-
-          
-
+<main class="container-fluid px-0">
+  <div id="videos" class="video-wrapper"></div>
+</main>
+<br><br>
         <!-- Footer -->
         <footer>
             <div class="footer-container">
@@ -148,5 +154,6 @@
     
     <!-- App JS -->
     <script src="/js/videos.js"></script>
+    <script src="/js/search.js"></script>
 </body>
 </html>

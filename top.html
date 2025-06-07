@@ -10,7 +10,7 @@
     
     <!-- Style CSS -->
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/explorar.css">
+    <link rel="stylesheet" href="/css/top.css">
 
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,8 +38,10 @@
                     </a>
 
                     <form class="d-none d-lg-flex ms-auto" role="search">
-                        <input class="form-control form-control-sm me-2" type="search" id="searchInput" placeholder="Buscar juegos..." aria-label="Buscar">
+
+                        <input class="form-control form-control-sm me-2" type="search" id="searchInput" placeholder="Search..." aria-label="Buscar">
                         <button class="btn btn-outline-light btn-sm" type="submit"><i class="fas fa-search" id="searchButton"></i></button>
+                      
                     </form>
 
                     <!-- Pantalla chica -->
@@ -64,13 +66,14 @@
                     <li class="nav-item mx-2"><a class="nav-link" href="index.html">Explore</a></li>
                     <li class="nav-item mx-2"><a class="nav-link" href="categorias.html">Categories</a></li>
                     <li class="nav-item mx-2"><a class="nav-link" href="noticias.html">News</a></li>
+                     <li class="nav-item mx-2"><a class="nav-link" href="videos.html">Game Plays</a></li>
                 </ul>
 
                 <!-- Menú colapsado -->
                 <div class="collapse navbar-collapse w-100 mt-2 d-lg-none" id="navbarCollapse">
                     
                     <form id="searchForm" class="d-flex mb-3" role="search">
-                        <input id="searchInput" class="form-control form-control-sm me-2" type="search" placeholder="Buscar juegos..." aria-label="Buscar">
+                        <input id="searchInput" class="form-control form-control-sm me-2" type="search" placeholder="Search..." aria-label="Buscar">
                         <button class="btn btn-outline-light btn-sm" type="submit"><i class="fas fa-search"></i></button>
                     </form>
 
@@ -78,6 +81,7 @@
                     <li class="nav-item mx-2"><a class="nav-link" href="index.html">Explore</a></li>
                     <li class="nav-item mx-2"><a class="nav-link" href="categorias.html">Categories</a></li>
                     <li class="nav-item mx-2"><a class="nav-link" href="noticias.html">News</a></li>
+                     <li class="nav-item mx-2"><a class="nav-link" href="videos.html">Game Plays</a></li>
                     </ul>
                 </div>
             </div>
@@ -89,22 +93,28 @@
         
         <main class="container my-5">
 
-            <h2 class="mb-4 text-center">Top 10 del mes</h2>
+            <h2 class="mb-2 text-center">Monthly top 10</h2>
+            <h5 class="text-center mb-5">Discover the most popular games this month, trending and capturing players' attention worldwide.</h5>
             <div class="row" id="game-list"></div>
 
-            <h2 class="mt-5 mb-4 text-center">Top Ventas</h2>
+            <h2 class="mt-5 mb-2 text-center">Top sales</h2>
+            <h5 class="text-center mb-5">Check out the best-selling games that are dominating the market right now.</h5>
             <div class="row" id="top-sales-list"></div>
 
-            <h2 class="mt-5 mb-4 text-center">Mejores Calificados</h2>
+            <h2 class="mt-5 mb-2 text-center">Top rated</h2>
+            <h5 class="text-center mb-5">Explore games with the highest ratings from players and critics alike.</h5>
             <div class="row" id="top-rated-list"></div>
 
-            <h2 class="mt-5 mb-4 text-center">Más jugadores</h2>
+            <h2 class="mt-5 mb-2 text-center">More players</h2>
+            <h5 class="text-center mb-5">Games that have attracted the largest number of active players recently.</h5>
             <div class="row" id="most-played-list"></div>
 
-            <h2 class="mt-5 mb-4 text-center">Más guardados por usuarios</h2>
+            <h2 class="mt-5 mb-2 text-center">Most saved by users</h2>
+            <h5 class="text-center mb-5">Find out which games users add to their favorites the most.</h5>
             <div class="row" id="most-added-list"></div>
 
-            <h2 class="mt-5 mb-4 text-center">Con más reseñas</h2>
+            <h2 class="mt-5 mb-2 text-center">With more reviews</h2>
+            <h5 class="text-center mb-5">Games with the most player reviews and community feedback.</h5>
             <div class="row" id="most-reviewed-list"></div>
 
             <div class="modal fade" id="gameInfoModal" tabindex="-1" aria-hidden="true">
@@ -112,13 +122,15 @@
                     <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="gameModalTitle"></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        <button type="button" class="modal-close" data-bs-dismiss="modal" aria-label="Cerrar">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                        </button>
                     </div>
                     <div class="modal-body">
-                        <img id="gameModalImage" class="img-fluid mb-3" alt="">
-                        <p id="gameModalDescription"></p>
-                        <p><strong>Plataformas:</strong> <span id="gameModalPlatforms"></span></p>
-                        <p><strong>Géneros:</strong> <span id="gameModalGenres"></span></p>
+                        <img id="gameModalImage" class="modal-img mx-auto d-block mb-3" alt="">
+                        <p id="gameModalDescription" class="modal-description"></p>
+                        <p><strong>Platforms:</strong> <span id="gameModalPlatforms"></span></p>
+                        <p><strong>Genres:</strong> <span id="gameModalGenres"></span></p>
                         <p><strong>Metacritic:</strong> <span id="gameModalMetacritic"></span></p>
                     </div>
                     </div>
@@ -180,5 +192,6 @@
     <!-- App JS -->
     
     <script src="./js/top.js"></script>
+    <script src="/js/search.js"></script>
 </body>
 </html>

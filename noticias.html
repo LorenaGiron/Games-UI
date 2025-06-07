@@ -22,13 +22,13 @@
 </head>
 
 <body>
-    
     <!-- Menú de navegación -->
     <header>
-    
         <nav class="navbar navbar-dark bg-navbar fixed-top shadow-sm py-2">
-            <div class="container-fluid flex-column">
+            <!-- Cometas -->
+            <div class="shooting-stars"></div>
 
+            <div class="container-fluid flex-column">
                 <div class="d-flex align-items-center justify-content-between flex-wrap mx-lg-auto w-98">
 
                     <!-- Pantalla grande -->
@@ -38,7 +38,7 @@
                     </a>
 
                     <form class="d-none d-lg-flex ms-auto" role="search">
-                        <input class="form-control form-control-sm me-2" type="search" placeholder="Buscar juegos..." aria-label="Buscar">
+                        <input class="form-control form-control-sm me-2" type="search" placeholder="Search games..." aria-label="Buscar">
                         <button class="btn btn-outline-light btn-sm" type="submit"><i class="fas fa-search"></i></button>
                     </form>
 
@@ -61,89 +61,108 @@
 
                 <!-- Enlaces pantalla grande -->
                 <ul class="navbar-nav w-100 d-none d-lg-flex flex-row justify-content-center mt-2">
-                   <li class="nav-item mx-2"><a class="nav-link" href="index.html">Explore</a></li>
-                    <li class="nav-item mx-2"><a class="nav-link" href="categorias.html">Categories</a></li>
-                    <li class="nav-item mx-2"><a class="nav-link" href="top.html">Top Games</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="index.html">Explore</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="categorias.html">Categories</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="top.html">Top Games</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="videos.html">Game Plays</a></li>
                 </ul>
 
                 <!-- Menú colapsado -->
                 <div class="collapse navbar-collapse w-100 mt-2 d-lg-none" id="navbarCollapse">
                     
                     <form class="d-flex mb-3" role="search">
-                        <input class="form-control form-control-sm me-2" type="search" placeholder="Buscar juegos..." aria-label="Buscar">
+                        <input class="form-control form-control-sm me-2" type="search" placeholder="Search..." aria-label="Buscar">
                         <button class="btn btn-outline-light btn-sm" type="submit"><i class="fas fa-search"></i></button>
                     </form>
 
                     <ul class="navbar-nav w-100 d-flex flex-column align-items-center">
-                       <li class="nav-item mx-2"><a class="nav-link" href="index.html">Explore</a></li>
-                    <li class="nav-item mx-2"><a class="nav-link" href="categorias.html">Categories</a></li>
-                    <li class="nav-item mx-2"><a class="nav-link" href="top.html">Top Games</a></li>
+                        <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="index.html">Explore</a></li>
+                        <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="categorias.html">Categories</a></li>
+                        <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="top.html">Top Games</a></li>
+                        <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="videos.html">Game Plays</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-
     </header>
 
     <!-- Contenido principal --> 
-    <div class="content">
-        
-        <main class="container my-lg-5">
+    <div class="particle-container" id="particleContainer">
+        <div class="content">
+            <main class="container my-lg-5">
+                <section id="genres-list">
+                    <h1 class="text-center mb-2">Latest News</h1>
+                    <h4 class="text-center mb-5">Stay updated with the latest 100 headlines in gaming</h4>
 
-            <h1 class="text-center mb-5">Latest News</h1>
+                    <section class="filters">
+                        <div class="autor">
+                            <label for="author-filter">Filter by author:</label>
+                            <select id="author-filter">
+                                <option value="">All</option>
+                            </select>
+                        </div>
+                        
+                        <div class="fecha">
+                            <label for="date-filter">Sort by date:</label>
+                            <select id="date-filter">
+                                <option value="newest">Latest</option>
+                                <option value="oldest">Oldest</option>
+                            </select>
+                        </div>
+                    </section>
 
-            <div id="news-container" class="news-container"></div>
-        
-            <div class="pagination">
-                <button id="prev-btn" disabled>Prev</button>
-                <button id="next-btn" disabled>Next</button>
-            </div>
-            
-        </main>
-
-        <!-- Footer -->
-        <footer>
-            <div class="footer-container">
-
-                <!-- Redes sociales -->
-                <div class="footer-section social">
-                    <h3>Follow us</h3>
-                    <p>Stay connected with us on social media.</p>
-                    <div class="social-icons">
-                        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <div id="news-container" class="news-container"></div>
+                
+                    <div class="pagination">
+                        <button id="prev-btn" class="mb-sm-3" disabled>Prev</button>
+                        <button id="next-btn" class="mb-sm-3" disabled>Next</button>
                     </div>
-                </div>
-
-                <!-- Newsletter -->
-                <div class="footer-section newsletter">
-                    <h3>Subscribe</h3>
-                    <p>Subscribe to our newsletter for the latest news and offers.</p>
-                    <form>
-                        <input type="email" placeholder="Email">
-                        <button type="submit">Subscribe now</button>
-                    </form>
-                </div>
-
-                <!-- Políticas y créditos -->
-                <div class="footer-section links">
-                    <h3>Links</h3>
-                    <ul>
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2025 Mr.Games</p>
-                <a href="#top" class="back-to-top">↑ Back to top</a>
-            </div>
-        </footer>
-
+                </section>
+            </main>
+        </div>
     </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+
+            <!-- Redes sociales -->
+            <div class="footer-section social">
+                <h3>Follow us</h3>
+                <p>Stay connected with us on social media.</p>
+                <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="footer-section newsletter">
+                <h3>Subscribe</h3>
+                <p>Subscribe to our newsletter for the latest news and offers.</p>
+                <form>
+                    <input type="email" placeholder="Email">
+                    <button type="submit">Subscribe now</button>
+                </form>
+            </div>
+
+            <!-- Políticas y créditos -->
+            <div class="footer-section links">
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Mr.Games</p>
+            <a href="#top" class="back-to-top">↑ Back to top</a>
+        </div>
+    </footer>
 
     <!-- Font Awesome CDN -->
     <script src="https://kit.fontawesome.com/a2d0c6a981.js" crossorigin="anonymous"></script>
@@ -153,5 +172,6 @@
     
     <!-- JS -->
     <script src="/js/news.js"></script>
+    <script src="/js/search.js"></script>
 </body>
 </html>
