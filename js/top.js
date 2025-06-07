@@ -145,6 +145,7 @@ async function loadGames() {
     if (localStorage.getItem("searchTerm")) {
         localStorage.removeItem("searchTerm");
     }
+
 }
 
 document.getElementById("searchInput").addEventListener("keydown", (e) => {
