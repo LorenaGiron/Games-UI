@@ -3,11 +3,8 @@ async function renderGenres() {
     const options = {
         method: 'GET',
         headers: {
-<<<<<<< HEAD
-               'x-rapidapi-key': '0272d01fe9mshf576bfdf1ca2482p13f58bjsnbc5c66037bba',
-=======
             'x-rapidapi-key': '0039500bbbmshf36332034469d5cp110907jsnb43b3ac05f4d',
->>>>>>> origin/develop
+
             'x-rapidapi-host': 'games-details.p.rapidapi.com'
         }
     };
@@ -114,8 +111,7 @@ document.addEventListener('DOMContentLoaded', renderGenres);
 // Exporta para uso externo
 window.renderGenres = renderGenres;
 
-<<<<<<< HEAD
-=======
+
 /* Partículas */
 document.addEventListener('DOMContentLoaded', function() {
   const container = document.getElementById('particleContainer');
@@ -262,4 +258,4 @@ document.addEventListener('DOMContentLoaded', () => {
   // Primera ejecución después de 3s
   setTimeout(createAdvancedShootingStars, 3000);
 });
->>>>>>> origin/develop
+
