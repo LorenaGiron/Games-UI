@@ -1,10 +1,12 @@
 const url = 'https://games-details.p.rapidapi.com/media/screenshots/730?limit=20&offset=0';
 const options = {
+
 	method: 'GET',
 	headers: {
 		'x-rapidapi-key': '57430afaa8msh1aa614aaa240bb5p1bb6eejsnad26a81269a2',
 		'x-rapidapi-host': 'games-details.p.rapidapi.com'
 	}
+
 };
 
 const letrasDisponibles = 'abcdefghijklmnopqrstuvwxyz'.split('');
