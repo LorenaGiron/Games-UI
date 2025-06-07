@@ -91,7 +91,6 @@ function createGameCard(game, contentHTML) {
 
 // Cargar y renderizar juegos en cada sección
 async function loadGames() {
-    const searchTerm = localStorage.getItem("searchTerm")?.toLowerCase();
 
     for (const section of sections) {
         try {
@@ -142,25 +141,7 @@ async function loadGames() {
             console.error(`Error cargando juegos para ${section.title}:`, err);
         }
     }
-
-    // Limpia búsqueda tras mostrar
-    if (localStorage.getItem("searchTerm")) {
-        localStorage.removeItem("searchTerm");
-    }
-
 }
-
-document.getElementById("searchInput").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        document.getElementById("searchButton").click();
-    }
-});
-
-document.getElementById("searchButton").addEventListener("click", () => {
-    const term = document.getElementById("searchInput").value.trim();
-    localStorage.setItem("searchTerm", term);
-    location.reload(); // recarga para filtrar
-});
 
 document.addEventListener("DOMContentLoaded", loadGames);
 

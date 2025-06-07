@@ -39,7 +39,7 @@
                     </a>
 
                     <form class="d-none d-lg-flex ms-auto" role="search">
-                        <input class="form-control form-control-sm me-2" type="search" placeholder="Search..." aria-label="Buscar">
+                        <input class="form-control form-control-sm me-2" type="search" placeholder="Search games..." aria-label="Buscar">
                         <button class="btn btn-outline-light btn-sm" type="submit"><i class="fas fa-search"></i></button>
                     </form>
 
@@ -95,35 +95,41 @@
             </div>
             <div class="welcome-text">
                 <h1>Welcome to Mr.Games</h1>
+                <i class="fas fa-gamepad" style="color: white; font-size: 50px;"></i>
                 <p>Your portal to discover the best games.</p>
             </div>
         </div>
     </header>
-
-    <!-- Contenido principal --> 
-    <section class="particle-container" id="particleContainer">
+   
+    <main>
+            <!-- Contenido principal --> 
+        <section class="particle-container" id="particleContainer">
+        <br><br><br>
         <div class="content">
+
+            <!-- Sección Trending Games -->
             <section class="mb-5 trending-section">
-                <div class="carousel-container position-relative">
-                    <h2 class="mb-4">Trending Games</h2>
-                    <button class="arrow left">&#8249;</button>
-                    <div class="carousel" id="populares-container"></div>
-                    <button class="arrow right">&#8250;</button>
-                </div>
+            <div class="carousel-container position-relative">
+                <h2 class="mb-4">Trending Games</h2>
+                <button class="arrow left">
+                <i class="fas fa-backward"></i> </button>
+                <div class="carousel" id="populares-container"></div>
+                <button class="arrow right"> <i class="fas fa-forward"></i></button>
+            </div>
             </section>
 
+            <!-- Sección More Games For U -->
             <section class="mb-5 more-section">
-                <div class="carousel-container position-relative">
-                    <h2 class="mb-4">More Games For U</h2>
-                    <button class="arrow left" id="arrow-left-more">&#8249;</button>
-                    <div class="carousel" id="recomendados-container"></div>
-                    <button class="arrow right" id="arrow-right-more">&#8250;</button>
-                </div>
+            <div class="carousel-container position-relative"><h2 class="mb-4">More Games For U</h2>
+                <button class="arrow left" id="arrow-left-more"><i class="fas fa-backward"></i> </button>
+                <div class="carousel" id="recomendados-container"></div>
+                <button class="arrow right" id="arrow-right-more"> <i class="fas fa-forward"></i></button>
+            </div>
             </section>
-        </div>
-    </section>
 
-        </main>
+        </div>
+        </section>
+    </main>       
 
         <!-- Footer -->
         <footer>
@@ -177,5 +183,6 @@
     
     <!-- App JS -->
     <script src="/js/app.js"></script>
+    <script src="/js/search.js"></script>
 </body>
 </html>
