@@ -82,7 +82,7 @@ function createGameCard(game, contentHTML) {
                 ${contentHTML}
             </div>
                 <button class="btn btn-primary mt-3" onclick="window.location.href='detallesTop.html?id=${game.id}'">
-                    Ver info
+                    See info
                 </button>       
             </div>
         </div>
