@@ -22,6 +22,7 @@
 </head>
 
 <body>
+    <div id="background-grid"></div>
     
     <!-- Menú de navegación -->
     <header>
@@ -56,14 +57,13 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                     </div>
-
                 </div>
 
                 <!-- Enlaces pantalla grande -->
                 <ul class="navbar-nav w-100 d-none d-lg-flex flex-row justify-content-center mt-2">
-                    <li class="nav-item mx-2"><a class="nav-link" href="categorias.html">Categories</a></li>
-                    <li class="nav-item mx-2"><a class="nav-link" href="top.html">Top Games</a></li>
-                    <li class="nav-item mx-2"><a class="nav-link" href="noticias.html">News</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="categorias.html">Categories</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="top.html">Top Games</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="noticias.html">News</a></li>
                 </ul>
 
                 <!-- Menú colapsado -->
@@ -75,42 +75,50 @@
                     </form>
 
                     <ul class="navbar-nav w-100 d-flex flex-column align-items-center">
-                    <li class="nav-item mx-2"><a class="nav-link" href="categorias.html">Categories</a></li>
-                    <li class="nav-item mx-2"><a class="nav-link" href="top.html">Top Games</a></li>
-                    <li class="nav-item mx-2"><a class="nav-link" href="noticias.html">News</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="categorias.html">Categories</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="top.html">Top Games</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link boton-brinco" href="noticias.html">News</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <div class="container mt-5 pt-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="text-center">Welcome to Mr.Games</h1>
-                    <p class="text-center">Your portal to discover the best games.</p>
-                </div>
+        <div class="collage-background">
+            <div class="collage-images" id="collage-container">
+                <!-- Las imágenes se insertan desde JS -->
+            </div>
+            <div class="welcome-text">
+                <h1>Welcome to Mr.Games</h1>
+                <p>Your portal to discover the best games.</p>
             </div>
         </div>
     </header>
 
     <!-- Contenido principal --> 
-    <div class="content">
-        
-        <main class="container my-5">
-
-            <section class="mb-5">
-                <h2 class="mb-4">Trending Games</h2>
-                <div class="row g-3" id="populares-container">
+    <section class="particle-container" id="particleContainer">
+        <div class="content">
+            <section class="mb-5 trending-section">
+                <div class="carousel-container position-relative">
+                    <h2 class="mb-4">Trending Games</h2>
+                    <button class="arrow left">&#8249;</button>
+                    <div class="carousel" id="populares-container"></div>
+                    <button class="arrow right">&#8250;</button>
                 </div>
             </section>
-        </main>
-
-        <!-- Footer -->
-        <footer class="text-center py-3">
-            &copy; 2025 Mr.Games
-        </footer>
-
-    </div>
+            <section class="mb-5 more-section">
+                <div class="carousel-container position-relative">
+                    <h2 class="mb-4">More Games For U</h2>
+                    <button class="arrow left" id="arrow-left-more">&#8249;</button>
+                    <div class="carousel" id="recomendados-container"></div>
+                    <button class="arrow right" id="arrow-right-more">&#8250;</button>
+                </div>
+            </section>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="text-center py-3">
+        &copy; 2025 Mr.Games
+    </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
