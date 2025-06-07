@@ -11,7 +11,7 @@ const url = 'https://games-details.p.rapidapi.com/media/screenshots/730?limit=20
 const options = {
   method: 'GET',
   headers: {
-    'x-rapidapi-key': 'f9e67e2e6fmsh3589b40edc66484p101ad8jsn65f7e8875264',
+    'x-rapidapi-key': 'fa076bb285msh7695b9780cdfbd3p1efd96jsn61537f61b091',
     'x-rapidapi-host': 'games-details.p.rapidapi.com'
   }
 };
