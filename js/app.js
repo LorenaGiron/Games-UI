@@ -1,17 +1,23 @@
+function mostrarSpinner(container) {
+  container.innerHTML = `
+    <div class="spinner-container text-center my-5">
+      <i class="fas fa-spinner fa-spin fa-3x text-light"></i>
+      <p class="mt-3 text-light">Rolling dice for awesome games... (ಠ‿↼)</p>
+    </div>
+  `;
+}
+
 const url = 'https://games-details.p.rapidapi.com/media/screenshots/730?limit=20&offset=0';
 const options = {
-
-	method: 'GET',
-	headers: {
-		'x-rapidapi-key': 'f9e67e2e6fmsh3589b40edc66484p101ad8jsn65f7e8875264',
-		'x-rapidapi-host': 'games-details.p.rapidapi.com'
-	}
-
+  method: 'GET',
+  headers: {
+    'x-rapidapi-key': 'f9e67e2e6fmsh3589b40edc66484p101ad8jsn65f7e8875264',
+    'x-rapidapi-host': 'games-details.p.rapidapi.com'
+  }
 };
 
 const letrasDisponibles = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
-// Función para obtener 3 letras únicas al azar
 function obtenerLetrasAlAzar(cantidad = 3) {
   const letrasSeleccionadas = new Set();
   while (letrasSeleccionadas.size < cantidad) {
@@ -23,9 +29,9 @@ function obtenerLetrasAlAzar(cantidad = 3) {
 
 async function fetchMultipleSearches() {
   const letrasBusqueda = obtenerLetrasAlAzar(3);
-  console.log('Letras usadas para búsqueda:', letrasBusqueda); // Para depuración
+  console.log('Letras usadas para búsqueda:', letrasBusqueda);
 
-  const juegosMap = new Map(); // Para evitar duplicados
+  const juegosMap = new Map();
 
   for (const letra of letrasBusqueda) {
     const url = `https://games-details.p.rapidapi.com/search?sugg=${letra}`;
@@ -55,10 +61,10 @@ function guardarID(id) {
   localStorage.setItem('juegoID', id);
 }
 
-/* Cargar juegos en tendencia */
 async function cargarJuegos() {
-  const juegos = await fetchMultipleSearches();
   const container = document.getElementById("populares-container");
+  mostrarSpinner(container);
+  const juegos = await fetchMultipleSearches();
   container.innerHTML = '';
 
   juegos.forEach(juego => {
@@ -76,7 +82,6 @@ async function cargarJuegos() {
   });
 }
 
-// Carrusel con flechas
 function activarFlechasCarrusel() {
   const container = document.getElementById("populares-container");
   const left = document.querySelector(".arrow.left");
@@ -92,10 +97,10 @@ function activarFlechasCarrusel() {
   });
 }
 
-/* Mas juegos para ti */
 async function cargarMasJuegos() {
-  const juegos = await fetchMultipleSearches();
   const container = document.getElementById("recomendados-container");
+  mostrarSpinner(container);
+  const juegos = await fetchMultipleSearches();
   container.innerHTML = '';
 
   juegos.forEach(juego => {
@@ -128,10 +133,10 @@ function activarFlechasCarruselRecomendados() {
   });
 }
 
-/*Fondo Mr.Games*/
 async function cargarCollage() {
-  const juegos = await fetchMultipleSearches();
   const container = document.getElementById("collage-container");
+ 
+  const juegos = await fetchMultipleSearches();
   container.innerHTML = '';
 
   juegos.slice(0, 10).forEach(juego => {
@@ -157,48 +162,39 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarCollage();
 });
 
-
 /* Partículas */
 document.addEventListener('DOMContentLoaded', function() {
   const container = document.getElementById('particleContainer');
-  const particleCount = 150; // Ajusta la cantidad de partículas
+  const particleCount = 150;
   
-  // Colores para las partículas (opcional)
   const colors = [
-    'rgba(255, 255, 255, 0.7)',  // Blanco
-    'rgba(100, 200, 255, 0.7)',  // Azul claro
-    'rgba(255, 100, 200, 0.7)',  // Rosa
-    'rgba(100, 255, 200, 0.7)'   // Verde agua
+    'rgba(255, 255, 255, 0.7)',
+    'rgba(100, 200, 255, 0.7)',
+    'rgba(255, 100, 200, 0.7)',
+    'rgba(100, 255, 200, 0.7)'
   ];
 
-  // Crear partículas
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement('div');
     particle.className = 'particle';
-    
-    // Tamaño aleatorio entre 1px y 4px
+
     const size = Math.random() * 3 + 1;
     particle.style.width = `${size}px`;
     particle.style.height = `${size}px`;
-    
-    // Posición aleatoria
+
     particle.style.left = `${Math.random() * 100}%`;
     particle.style.top = `${Math.random() * 100}%`;
-    
-    // Opacidad aleatoria
+
     const opacity = Math.random() * 0.6 + 0.1;
     particle.style.opacity = opacity;
-    
-    // Color aleatorio (si quieres variedad)
+
     particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-    
-    // Animación flotante básica
+
     particle.style.transform = `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`;
-    
+
     container.appendChild(particle);
   }
-  
-  // Función para hacer brillar partículas aleatorias
+
   function randomGlow() {
     const particles = document.querySelectorAll('.particle');
     const visibleParticles = Array.from(particles).filter(p => {
@@ -210,26 +206,23 @@ document.addEventListener('DOMContentLoaded', function() {
         rect.right > 0
       );
     });
-    
+
     if (visibleParticles.length > 0) {
       const randomIndex = Math.floor(Math.random() * visibleParticles.length);
       const particle = visibleParticles[randomIndex];
       
       particle.classList.add('glow');
-      
-      // Tiempo de brillo aleatorio entre 0.5s y 1.5s
+
       const glowTime = Math.random() * 1000 + 500;
-      
+
       setTimeout(() => {
         particle.classList.remove('glow');
       }, glowTime);
     }
   }
-  
-  // Activar brillo aleatorio cada 200-500ms
+
   setInterval(randomGlow, Math.random() * 300 + 200);
-  
-  // Efecto al pasar el mouse (opcional)
+
   container.addEventListener('mousemove', (e) => {
     const particles = document.querySelectorAll('.particle');
     particles.forEach(particle => {
@@ -240,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
         Math.pow(e.clientX - centerX, 2) + 
         Math.pow(e.clientY - centerY, 2)
       );
-      
+
       if (distance < 100) {
         particle.classList.add('glow');
         setTimeout(() => {
