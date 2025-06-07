@@ -22,6 +22,7 @@
 </head>
 
 <body id="top">
+    
     <div id="background-grid"></div>
     
     <!-- Menú de navegación -->
@@ -89,10 +90,7 @@
             </div>
         </nav>
 
-        <div class="collage-background">
-            <div class="collage-images" id="collage-container">
-                <!-- Las imágenes se insertan desde JS -->
-            </div>
+        <div class="collage-background-scroll">
             <div class="welcome-text">
                 <h1>Welcome to Mr.Games</h1>
                 <i class="fas fa-gamepad" style="color: white; font-size: 50px;"></i>
@@ -101,79 +99,79 @@
         </div>
     </header>
    
+    <!-- Contenido principal --> 
     <main>
-            <!-- Contenido principal --> 
+        
         <section class="particle-container" id="particleContainer">
-        <br><br><br>
-        <div class="content">
+            <br><br><br>
 
-            <!-- Sección Trending Games -->
-            <section class="mb-5 trending-section">
-            <div class="carousel-container position-relative">
-                <h2 class="mb-4">Trending Games</h2>
-                <button class="arrow left">
-                <i class="fas fa-backward"></i> </button>
-                <div class="carousel" id="populares-container"></div>
-                <button class="arrow right"> <i class="fas fa-forward"></i></button>
+            <div class="content">
+
+                <!-- Sección Trending Games -->
+                <section class="mb-5 trending-section">
+                    <div class="carousel-container position-relative">
+                        <h2 class="mb-4">Trending Games</h2>
+                        <button class="arrow left"><i class="fas fa-backward"></i></button>
+                        <div class="carousel" id="populares-container"></div>
+                        <button class="arrow right"> <i class="fas fa-forward"></i></button>
+                    </div>
+                </section>
+
+                <!-- Sección More Games For U -->
+                <section class="mb-5 more-section">
+                    <div class="carousel-container position-relative">
+                        <h2 class="mb-4">More Games For U</h2>
+                        <button class="arrow left" id="arrow-left-more"><i class="fas fa-backward"></i> </button>
+                        <div class="carousel" id="recomendados-container"></div>
+                        <button class="arrow right" id="arrow-right-more"> <i class="fas fa-forward"></i></button>
+                    </div>
+                </section>
+
             </div>
-            </section>
-
-            <!-- Sección More Games For U -->
-            <section class="mb-5 more-section">
-            <div class="carousel-container position-relative"><h2 class="mb-4">More Games For U</h2>
-                <button class="arrow left" id="arrow-left-more"><i class="fas fa-backward"></i> </button>
-                <div class="carousel" id="recomendados-container"></div>
-                <button class="arrow right" id="arrow-right-more"> <i class="fas fa-forward"></i></button>
-            </div>
-            </section>
-
-        </div>
         </section>
     </main>       
 
-        <!-- Footer -->
-        <footer>
-            <div class="footer-container">
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
 
-                <!-- Redes sociales -->
-                <div class="footer-section social">
-                    <h3>Follow us</h3>
-                    <p>Stay connected with us on social media.</p>
-                    <div class="social-icons">
-                        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-
-                <!-- Newsletter -->
-                <div class="footer-section newsletter">
-                    <h3>Subscribe</h3>
-                    <p>Subscribe to our newsletter for the latest news and offers.</p>
-                    <form>
-                        <input type="email" placeholder="Email">
-                        <button type="submit">Subscribe now</button>
-                    </form>
-                </div>
-
-                <!-- Políticas y créditos -->
-                <div class="footer-section links">
-                    <h3>Links</h3>
-                    <ul>
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                    </ul>
+            <!-- Redes sociales -->
+            <div class="footer-section social">
+                <h3>Follow us</h3>
+                <p>Stay connected with us on social media.</p>
+                <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
 
-            <div class="footer-bottom">
-                <p>&copy; 2025 Mr.Games</p>
-                <a href="#top" class="back-to-top">↑ Back to top</a>
+            <!-- Newsletter -->
+            <div class="footer-section newsletter">
+                <h3>Subscribe</h3>
+                <p>Subscribe to our newsletter for the latest news and offers.</p>
+                <form>
+                    <input type="email" placeholder="Email">
+                    <button type="submit">Subscribe now</button>
+                </form>
             </div>
-        </footer>
 
-    </div>
+            <!-- Políticas y créditos -->
+            <div class="footer-section links">
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Mr.Games</p>
+            <a href="#top" class="back-to-top">↑ Back to top</a>
+        </div>
+    </footer>
 
     <!-- Font Awesome CDN -->
     <script src="https://kit.fontawesome.com/a2d0c6a981.js" crossorigin="anonymous"></script>
