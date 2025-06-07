@@ -227,6 +227,26 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Activar brillo aleatorio cada 200-500ms
   setInterval(randomGlow, Math.random() * 300 + 200);
+
+  container.addEventListener('mousemove', (e) => {
+    const particles = document.querySelectorAll('.particle');
+    particles.forEach(particle => {
+      const rect = particle.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const distance = Math.sqrt(
+        Math.pow(e.clientX - centerX, 2) + 
+        Math.pow(e.clientY - centerY, 2)
+      );
+
+      if (distance < 100) {
+        particle.classList.add('glow');
+        setTimeout(() => {
+          particle.classList.remove('glow');
+        }, 500);
+      }
+    });
+  });
 });
 
 /* Brillo del Logo*/
