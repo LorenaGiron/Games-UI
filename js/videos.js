@@ -1,7 +1,8 @@
 const videoUrls = [
+  "https://www.youtube.com/watch?v=AsOPFHicUz8",
+  "https://www.youtube.com/watch?v=IxmGYFaEEfg",
   "https://www.youtube.com/watch?v=LIu8vzPlE5g",
   "https://www.youtube.com/watch?v=G8x3Dd9CXfA",
-  "https://www.youtube.com/watch?v=IxmGYFaEEfg",
   "https://www.youtube.com/watch?v=AsOPFHicUz8",
   "https://www.youtube.com/watch?v=gwyfaH6tFSc",
   "https://www.youtube.com/watch?v=MlW79fk1SkE",
@@ -28,104 +29,109 @@ const videoUrls = [
   "https://www.youtube.com/watch?v=PjoXLq7fqXY",
   "https://www.youtube.com/watch?v=yr9TmG2-oUU",
   "https://www.youtube.com/watch?v=9TG-Ya469Vk",
-  "https://www.youtube.com/watch?v=gee90tbqdhg"
+  "https://www.youtube.com/watch?v=gee90tbqdhg",
 ];
 
+let currentIndex = 0;
+let videoCards = [];
 
-// Función para cargar las miniaturas iniciales
-function loadYouTubeThumbnails() {
+function loadYouTubeVideos() {
   const container = document.getElementById('videos');
   if (!container) {
     console.error('No se encontró el contenedor con id="videos".');
     return;
   }
 
-  // Mezcla y toma 12 videos
-  const shuffledUrls = [...videoUrls].sort(() => Math.random() - 0.5);
-  const selectedUrls = shuffledUrls.slice(0, 12);
-
-  selectedUrls.forEach((url, index) => {
+  videoUrls.forEach((url) => {
     const videoId = new URL(url).searchParams.get('v');
     if (!videoId) return;
 
     const videoCard = document.createElement('div');
     videoCard.className = 'video-card';
     videoCard.dataset.videoId = videoId;
-
-    const thumbnail = document.createElement('img');
-    thumbnail.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-    thumbnail.alt = `Video ${index + 1}`;
-    thumbnail.className = 'thumbnail';
-
-    // No autoplay al principio, solo miniatura
-    videoCard.appendChild(thumbnail);
-
-    const title = document.createElement('h3');
-    title.textContent = `Video ${index + 1}`;
-    videoCard.appendChild(title);
-
     container.appendChild(videoCard);
   });
 
-  // Inicializar observador para reproducir solo el video visible
-  initVideoObserver(container);
+  videoCards = Array.from(container.children);
+  showVideo(currentIndex);
+  createScrollButtons();
 }
 
-// Observador de intersección para controlar qué video reproducir
-function initVideoObserver(container) {
-  let currentIframe = null;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const videoCard = entry.target;
-      const videoId = videoCard.dataset.videoId;
-
-      if (entry.isIntersecting) {
-        // Cuando el video entra en viewport, reemplazar miniatura por iframe (si no está ya)
-        if (!videoCard.querySelector('iframe')) {
-          const iframe = document.createElement('iframe');
-          iframe.width = "100%";
-          iframe.height = "100%";
-          iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
-          iframe.frameBorder = "0";
-          iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-          iframe.allowFullscreen = true;
-
-          const thumbnail = videoCard.querySelector('img');
-          if (thumbnail) videoCard.replaceChild(iframe, thumbnail);
-
-          // Si hay un iframe anterior, removerlo y poner miniatura
-          if (currentIframe && currentIframe !== videoCard) {
-            resetVideoCard(currentIframe);
-          }
-          currentIframe = videoCard;
-        }
-      } else {
-        // Cuando el video sale del viewport, volver a miniatura
-        if (videoCard.querySelector('iframe')) {
-          resetVideoCard(videoCard);
-          if (currentIframe === videoCard) currentIframe = null;
-        }
-      }
-    });
-  }, { threshold: 0.8 }); // threshold para considerar visible
-
-  // Observar cada videoCard
-  container.querySelectorAll('.video-card').forEach(card => observer.observe(card));
+function createIframe(videoId) {
+  const iframe = document.createElement('iframe');
+  iframe.width = "100%";
+  iframe.height = "100%";
+  iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&enablejsapi=1`;
+  iframe.frameBorder = "0";
+  iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen");
+  iframe.setAttribute("allowfullscreen", "true");
+  return iframe;
 }
 
-// Función para reemplazar iframe por miniatura
-function resetVideoCard(videoCard) {
+function showVideo(index) {
+  const videoCard = videoCards[index];
+  if (!videoCard) return;
+
   const videoId = videoCard.dataset.videoId;
-  const iframe = videoCard.querySelector('iframe');
-  if (!iframe) return;
 
-  const thumbnail = document.createElement('img');
-  thumbnail.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-  thumbnail.alt = "Video thumbnail";
-  thumbnail.className = 'thumbnail';
+  videoCard.innerHTML = '';
+  const iframe = createIframe(videoId);
+  videoCard.appendChild(iframe);
 
-  videoCard.replaceChild(thumbnail, iframe);
+ 
 }
 
-document.addEventListener('DOMContentLoaded', loadYouTubeThumbnails);
+function createScrollButtons() {
+  // Botón Izquierda abajo - VIDEO ANTERIOR
+  const leftButton = document.createElement('button');
+  leftButton.innerHTML = '↓';
+  leftButton.id = 'scroll-left-btn';
+  Object.assign(leftButton.style, {
+    position: 'fixed',
+    bottom: '20px',
+    left: '20px',
+    width: '50px',
+    height: '50px',
+    borderRadius: '50%',
+    fontSize: '30px',
+    cursor: 'pointer',
+    zIndex: '9999',
+    transform: 'rotate(180deg)',  // gira la flecha para que apunte hacia arriba
+  });
+  document.body.appendChild(leftButton);
+
+  // Botón Derecha abajo - VIDEO SIGUIENTE
+  const rightButton = document.createElement('button');
+  rightButton.innerHTML = '↓';
+  rightButton.id = 'scroll-right-btn';
+  Object.assign(rightButton.style, {
+    position: 'fixed',
+    bottom: '20px',
+    right: '20px',
+    width: '50px',
+    height: '50px',
+    borderRadius: '50%',
+    fontSize: '30px',
+    cursor: 'pointer',
+    zIndex: '9999',
+  });
+  document.body.appendChild(rightButton);
+
+  leftButton.addEventListener('click', () => {
+    const previousCard = videoCards[currentIndex];
+    previousCard.innerHTML = '';
+
+    currentIndex = (currentIndex - 1 + videoCards.length) % videoCards.length;
+    showVideo(currentIndex);
+  });
+
+  rightButton.addEventListener('click', () => {
+    const previousCard = videoCards[currentIndex];
+    previousCard.innerHTML = '';
+
+    currentIndex = (currentIndex + 1) % videoCards.length;
+    showVideo(currentIndex);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', loadYouTubeVideos);
