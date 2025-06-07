@@ -14,18 +14,29 @@ const fetchNews = async () => {
         }
     };
 
+    const container = document.getElementById('news-container');
+
+    // Mostrar spinner dentro del contenedor de noticias
+    container.innerHTML = `
+        <div id="loading" style="text-align: center; padding: 40px;">
+            <i class="fas fa-spinner fa-spin fa-3x" style="color: #555;"></i>
+            <p style="margin-top: 15px; font-size: 1.2rem;">Loading legendary loot... (ง •̀_•́)ง</p>
+
+        </div>
+    `;
+
     try {
         const response = await fetch(url, options);
         const result = await response.json();
         console.log('Fetched news:', result);
         allNews = result.slice(0, maxNews);
-        filteredNews = []; // Limpiar filtros al cargar
+        filteredNews = [];
         populateAuthorFilter();
         displayPage(currentPage);
         updateButtons();
     } catch (error) {
         console.error('Error fetching news:', error);
-        document.getElementById('news-container').innerHTML = '<p>Error al cargar las noticias.</p>';
+        container.innerHTML = '<p>Error al cargar las noticias.</p>';
     }
 };
 
@@ -36,20 +47,18 @@ const populateAuthorFilter = () => {
         if (!news.author) return;
 
         const cleanName = news.author.trim().toLowerCase();
-
         if (!authorMap.has(cleanName)) {
             authorMap.set(cleanName, news.author.trim());
         }
     });
 
     const authors = Array.from(authorMap.values()).sort((a, b) => a.localeCompare(b));
-
     const select = document.getElementById('author-filter');
     select.innerHTML = '<option value="">All the authors</option>';
 
     authors.forEach(author => {
         const option = document.createElement('option');
-        option.value = author.toLowerCase(); // comparar con esto
+        option.value = author.toLowerCase();
         option.textContent = author;
         select.appendChild(option);
     });
@@ -61,11 +70,9 @@ const applyFilters = () => {
 
     filteredNews = allNews.filter(news => {
         const authorNormalized = (news.author || '').trim().toLowerCase();
-        const matchesAuthor = selectedAuthor === '' || authorNormalized === selectedAuthor;
-        return matchesAuthor;
+        return selectedAuthor === '' || authorNormalized === selectedAuthor;
     });
 
-    // Ordenar por fecha
     filteredNews.sort((a, b) => {
         const dateA = new Date(a.date);
         const dateB = new Date(b.date);
@@ -79,7 +86,7 @@ const applyFilters = () => {
 
 const displayPage = (page) => {
     const container = document.getElementById('news-container');
-    container.innerHTML = '';
+    container.innerHTML = ''; // Quita el spinner o cualquier otro contenido
 
     const newsToShow = filteredNews.length ? filteredNews : allNews;
     const start = (page - 1) * newsPerPage;
