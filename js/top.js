@@ -12,13 +12,14 @@ const sections = [
     {
         title: "Top 10 del mes",
         elementId: "game-list",
-        ordering: "-rating",
+        ordering: "-playtime",  // Cambia el criterio para destacar juegos jugados activamente
         dateRange: `${startDate},${endDate}`,
         page_size: 10,
         displayFields: game => `
-            <p class="card-text">Rating: ${game.rating} ⭐</p>
-            <p class="card-text">Lanzado: ${game.released}</small></p>
-        `
+            <p class="card-text">Juegos parecidos: ${game.suggestions_count}</p>
+            <p class="card-text">Lanzado: ${game.released}</p>
+        `,
+        filter: game => game.playtime > 0 && game.reviews_count > 0
     },
     {
         title: "Top Ventas",
@@ -71,20 +72,27 @@ const sections = [
 // Tarjeta de juego dinámica
 function createGameCard(game, contentHTML) {
     return `
-    <div class="col-md-3 mb-4">
+        <div class="col-md-3 mb-4">
         <div class="card h-100 shadow-sm">
             <img src="${game.background_image}" class="card-img-top" alt="${game.name}">
-            <div class="card-body">
+            <div class="card-body d-flex flex-column justify-content-between">
+            <div>
                 <h5 class="card-title">${game.name}</h5>
                 ${contentHTML}
             </div>
+            <button class="btn btn-primary mt-3" onclick="showGameInfoById(${game.id}, '${game.name.replace(/'/g, "\\'")}')">
+                Ver info
+            </button>
+            </div>
         </div>
-    </div>
+        </div>
     `;
 }
 
 // Cargar y renderizar juegos en cada sección
 async function loadGames() {
+    const searchTerm = localStorage.getItem("searchTerm")?.toLowerCase();
+
     for (const section of sections) {
         try {
             const url = new URL(`https://api.rawg.io/api/games`);
@@ -102,13 +110,127 @@ async function loadGames() {
             container.innerHTML = "";
 
             data.results.forEach(game => {
-                const extraInfo = section.displayFields(game);
-                container.innerHTML += createGameCard(game, extraInfo);
+                if (!game.background_image) return;
+
+                const gameName = game.name.toLowerCase();
+
+                if (!searchTerm || gameName.includes(searchTerm)) {
+                    const extraInfo = section.displayFields(game);
+
+                    // Agregamos texto indicando a qué grupo pertenece si hay búsqueda
+                    let cardHTML = createGameCard(game, extraInfo);
+                    if (searchTerm) {
+                        cardHTML = cardHTML.replace(
+                        '<div class="card-body d-flex flex-column justify-content-between">',
+                        `<div class="card-body d-flex flex-column justify-content-between">
+                            <p class="badge bg-info mb-2">Grupo: ${section.title}</p>`
+                        );
+                    }
+
+                    container.innerHTML += cardHTML;
+                }
             });
+
+            // Oculta secciones vacías si hay búsqueda
+            if (searchTerm && container.innerHTML.trim() === "") {
+                document.getElementById(section.elementId).previousElementSibling.style.display = "none";
+            }
+
         } catch (err) {
             console.error(`Error cargando juegos para ${section.title}:`, err);
         }
     }
+
+    // Limpia búsqueda tras mostrar
+    if (localStorage.getItem("searchTerm")) {
+        localStorage.removeItem("searchTerm");
+    }
+
 }
 
+document.getElementById("searchInput").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        document.getElementById("searchButton").click();
+    }
+});
+
+document.getElementById("searchButton").addEventListener("click", () => {
+    const term = document.getElementById("searchInput").value.trim();
+    localStorage.setItem("searchTerm", term);
+    location.reload(); // recarga para filtrar
+});
+
 document.addEventListener("DOMContentLoaded", loadGames);
+
+async function showGameInfo(game) {
+  const modalTitle = document.getElementById("gameModalTitle");
+  const modalImage = document.getElementById("gameModalImage");
+  const modalDescription = document.getElementById("gameModalDescription");
+  const modalPlatforms = document.getElementById("gameModalPlatforms");
+  const modalGenres = document.getElementById("gameModalGenres");
+  const modalMetacritic = document.getElementById("gameModalMetacritic");
+
+  // Muestra loading temporal mientras se carga la data
+  modalTitle.textContent = game.name;
+  modalImage.src = game.background_image;
+  modalImage.alt = game.name;
+  modalDescription.textContent = "Cargando descripción...";
+  modalPlatforms.textContent = "Cargando...";
+  modalGenres.textContent = "Cargando...";
+  modalMetacritic.textContent = "Cargando...";
+
+  const modal = new bootstrap.Modal(document.getElementById('gameInfoModal'));
+  modal.show();
+
+  try {
+    const res = await fetch(`https://api.rawg.io/api/games/${game.id}?key=${apiKey}`);
+    const fullGame = await res.json();
+
+    modalDescription.textContent = fullGame.description_raw || "Descripción no disponible.";
+    modalPlatforms.textContent = fullGame.platforms?.map(p => p.platform.name).join(', ') || "No disponible";
+    modalGenres.textContent = fullGame.genres?.map(g => g.name).join(', ') || "No disponible";
+    modalMetacritic.textContent = fullGame.metacritic ?? "N/A";
+  } catch (error) {
+    modalDescription.textContent = "Error al cargar la descripción.";
+    modalPlatforms.textContent = "Error";
+    modalGenres.textContent = "Error";
+    modalMetacritic.textContent = "Error";
+    console.error("Error al obtener detalles del juego:", error);
+  }
+}
+
+async function showGameInfoById(gameId, gameName) {
+  const modalTitle = document.getElementById("gameModalTitle");
+  const modalImage = document.getElementById("gameModalImage");
+  const modalDescription = document.getElementById("gameModalDescription");
+  const modalPlatforms = document.getElementById("gameModalPlatforms");
+  const modalGenres = document.getElementById("gameModalGenres");
+  const modalMetacritic = document.getElementById("gameModalMetacritic");
+
+  // Mostrar loading mientras se busca
+  modalTitle.textContent = gameName;
+  modalImage.src = "";
+  modalImage.alt = gameName;
+  modalDescription.textContent = "Cargando descripción...";
+  modalPlatforms.textContent = "Cargando...";
+  modalGenres.textContent = "Cargando...";
+  modalMetacritic.textContent = "Cargando...";
+
+  const modal = new bootstrap.Modal(document.getElementById('gameInfoModal'));
+  modal.show();
+
+  try {
+    const res = await fetch(`https://api.rawg.io/api/games/${gameId}?key=${apiKey}`);
+    const game = await res.json();
+
+    modalImage.src = game.background_image;
+    modalImage.alt = game.name;
+    modalDescription.textContent = game.description_raw || "Descripción no disponible.";
+    modalPlatforms.textContent = game.platforms?.map(p => p.platform.name).join(', ') || "No disponible";
+    modalGenres.textContent = game.genres?.map(g => g.name).join(', ') || "No disponible";
+    modalMetacritic.textContent = game.metacritic ?? "N/A";
+  } catch (error) {
+    console.error("Error al obtener detalles del juego:", error);
+    modalDescription.textContent = "Error al cargar información.";
+  }
+}

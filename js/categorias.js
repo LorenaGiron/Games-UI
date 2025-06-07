@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Colores de la paleta :root
-    const customColors = ['var(--medio)', 'var(--fuerte)', 'var(--claro)'];
+    const customColors = ['var(--medio)', 'var(--fuerte)', 'var(--claro)','var(--gris)','var(--grisMedio)'];
 
     try 
     {
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             {
                 e.preventDefault();
                 localStorage.setItem('selectedGenre', genre); 
-                window.location.href = 'genre.html';
+                window.location.href = 'genero.html';
             };
 
             // Ícono
