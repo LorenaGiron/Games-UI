@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const options = 
     {
         method: 'GET',
-        headers: {
-            'x-rapidapi-key': '43b86be099mshf40e25c8e81d0eep1b4abajsn251d504d2dce',
+        headers: {         
+            'x-rapidapi-key': 'e801fcf27fmsh3d657d96ccf8155p148008jsnd372f34bb49f',
             'x-rapidapi-host': 'games-details.p.rapidapi.com'
         }
     };
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Colores de la paleta :root
-    const customColors = ['var(--medio)', 'var(--fuerte)', 'var(--claro)'];
+    const customColors = ['var(--medio)', 'var(--fuerte)', 'var(--claro)','var(--gris)','var(--grisMedio)'];
 
     try 
     {
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             {
                 e.preventDefault();
                 localStorage.setItem('selectedGenre', genre); 
-                window.location.href = 'genre.html';
+                window.location.href = 'genero.html';
             };
 
             // Ícono

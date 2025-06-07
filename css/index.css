@@ -1,6 +1,13 @@
+body {
+  position: relative;
+  min-height: 100vh;
+  background-color: #0c0e19;
+  overflow-x: hidden;
+}
+
 .hero 
 {
-    height: 100vh;
+  height: 100vh;
 }
 
 .card-game:hover 
@@ -8,4 +15,176 @@
     transform: scale(1.03);
     transition: all 0.3s ease-in-out;
     box-shadow: 0 4px 20px rgba(255,255,255,0.2);
+}
+
+.particle-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: var(--medio);
+  overflow: hidden;
+}
+
+/* Partículas individuales */
+.particle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: 
+    box-shadow 0.5s ease, 
+    transform 0.5s ease,
+    opacity 0.5s ease;
+}
+
+/* Efecto de brillo */
+.particle.glow {
+  box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.9);
+  transform: scale(1.5);
+  opacity: 1;
+}
+
+/*Animacion botones */
+.boton-brinco {
+  transition: transform 0.2s ease-in-out;
+}
+
+.boton-brinco:hover {
+  animation: saltar 0.5s ease;
+}
+
+@keyframes saltar {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-8px); }
+  50%  { transform: translateY(0); }
+  70%  { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+/* Flechas */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 20px 40px;
+}
+
+.carousel {
+  display: flex;
+  gap: 80px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.card-game {
+  flex: 0 0 300px;
+  
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  background: rgba(255, 255, 255, 0.7);
+  color: #333;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3 ease;
+}
+
+.arrow:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: #000; 
+}
+
+.arrow.left { 
+  left: -15px; 
+}
+.arrow.right { 
+  right: -15px; 
+}
+
+/* Fondo Mr.Games */
+.collage-background {
+    position: relative;
+    overflow: hidden;
+    height: 400px; /* ajustable */
+}
+
+.collage-background .collage-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 5px;
+    z-index: 1;
+    opacity: 0.2;
+}
+
+.collage-background .collage-images img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: zoomIn 20s infinite alternate;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+.collage-background .welcome-text {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding-top: 100px;
+    color: white;
+    backdrop-filter: blur(3px);
+}
+
+/* Página responsiva */
+@media (max-width: 768px) {
+  .carousel {
+    gap: 10px;
+  }
+
+  .card-game {
+    flex: 0 0 180px;
+  }
+
+  .arrow {
+    font-size: 1.5rem;
+    padding: 5px;
+  }
+
+  h1, h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .carousel-container {
+    padding: 0 10px;
+  }
+
+  .navbar-nav {
+    font-size: 0.9rem;
+  }
 }

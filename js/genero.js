@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const options = {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': '1eaa470d96msh9a134e90ef0b98ap146897jsn112e62225d2e',
+      'x-rapidapi-key': 'e801fcf27fmsh3d657d96ccf8155p148008jsnd372f34bb49f',
       'x-rapidapi-host': 'games-details.p.rapidapi.com'
     }
   };
