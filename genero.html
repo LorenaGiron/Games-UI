@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mr.Games - Top games</title>
+    <title>Mr.Games - Categories</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     
     <!-- Style CSS -->
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/explorar.css">
+    <link rel="stylesheet" href="/css/generos.css">
+    
 
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,8 +39,8 @@
                     </a>
 
                     <form class="d-none d-lg-flex ms-auto" role="search">
-                        <input class="form-control form-control-sm me-2" type="search" id="searchInput" placeholder="Buscar juegos..." aria-label="Buscar">
-                        <button class="btn btn-outline-light btn-sm" type="submit"><i class="fas fa-search" id="searchButton"></i></button>
+                        <input class="form-control form-control-sm me-2" type="search" placeholder="Buscar juegos..." aria-label="Buscar">
+                        <button class="btn btn-outline-light btn-sm" type="submit"><i class="fas fa-search"></i></button>
                     </form>
 
                     <!-- Pantalla chica -->
@@ -61,22 +62,24 @@
 
                 <!-- Enlaces pantalla grande -->
                 <ul class="navbar-nav w-100 d-none d-lg-flex flex-row justify-content-center mt-2">
-                    <li class="nav-item mx-2"><a class="nav-link" href="index.html">Explore</a></li>
+                   <li class="nav-item mx-2"><a class="nav-link" href="index.html">Explore</a></li>
                     <li class="nav-item mx-2"><a class="nav-link" href="categorias.html">Categories</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link" href="top.html">Top Games</a></li>
                     <li class="nav-item mx-2"><a class="nav-link" href="noticias.html">News</a></li>
                 </ul>
 
                 <!-- Menú colapsado -->
                 <div class="collapse navbar-collapse w-100 mt-2 d-lg-none" id="navbarCollapse">
                     
-                    <form id="searchForm" class="d-flex mb-3" role="search">
-                        <input id="searchInput" class="form-control form-control-sm me-2" type="search" placeholder="Buscar juegos..." aria-label="Buscar">
+                    <form class="d-flex mb-3" role="search">
+                        <input class="form-control form-control-sm me-2" type="search" placeholder="Buscar juegos..." aria-label="Buscar">
                         <button class="btn btn-outline-light btn-sm" type="submit"><i class="fas fa-search"></i></button>
                     </form>
 
                     <ul class="navbar-nav w-100 d-flex flex-column align-items-center">
                     <li class="nav-item mx-2"><a class="nav-link" href="index.html">Explore</a></li>
                     <li class="nav-item mx-2"><a class="nav-link" href="categorias.html">Categories</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link" href="top.html">Top Games</a></li>
                     <li class="nav-item mx-2"><a class="nav-link" href="noticias.html">News</a></li>
                     </ul>
                 </div>
@@ -85,46 +88,27 @@
 
     </header>
 
-    <div class="content">
+    <!-- Contenido principal --> 
+   <div class="content">
+
         
         <main class="container my-5">
+            
 
-            <h2 class="mb-4 text-center">Top 10 del mes</h2>
-            <div class="row" id="game-list"></div>
-
-            <h2 class="mt-5 mb-4 text-center">Top Ventas</h2>
-            <div class="row" id="top-sales-list"></div>
-
-            <h2 class="mt-5 mb-4 text-center">Mejores Calificados</h2>
-            <div class="row" id="top-rated-list"></div>
-
-            <h2 class="mt-5 mb-4 text-center">Más jugadores</h2>
-            <div class="row" id="most-played-list"></div>
-
-            <h2 class="mt-5 mb-4 text-center">Más guardados por usuarios</h2>
-            <div class="row" id="most-added-list"></div>
-
-            <h2 class="mt-5 mb-4 text-center">Con más reseñas</h2>
-            <div class="row" id="most-reviewed-list"></div>
-
-            <div class="modal fade" id="gameInfoModal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="gameModalTitle"></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                    </div>
-                    <div class="modal-body">
-                        <img id="gameModalImage" class="img-fluid mb-3" alt="">
-                        <p id="gameModalDescription"></p>
-                        <p><strong>Plataformas:</strong> <span id="gameModalPlatforms"></span></p>
-                        <p><strong>Géneros:</strong> <span id="gameModalGenres"></span></p>
-                        <p><strong>Metacritic:</strong> <span id="gameModalMetacritic"></span></p>
-                    </div>
-                    </div>
+              <div id="genre-results"></div>
+              <!-- Mensaje de carga -->
+                <div id="loading-message" class="text-center my-5" style="display: none;">
+                <i class="fas fa-spinner fa-spin fa-3x text-light"></i>
+                <p class="mt-3 text-light">Searching for games in this category...</p>
                 </div>
-            </div>
 
+
+
+            <section class="mb-5">
+                <h2 class="mb-4 text-center">Still hungry for more? 👀 Check these out!</h2>
+                <div class="row g-3" id="populares-container">
+                </div>
+            </section>
         </main>
 
         <!-- Footer -->
@@ -173,12 +157,11 @@
 
     <!-- Font Awesome CDN -->
     <script src="https://kit.fontawesome.com/a2d0c6a981.js" crossorigin="anonymous"></script>
-
+    
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
     
     <!-- App JS -->
-    
-    <script src="./js/top.js"></script>
+    <script src="/js/genero.js"></script>
 </body>
 </html>
