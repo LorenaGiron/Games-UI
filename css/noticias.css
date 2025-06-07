@@ -80,6 +80,53 @@
     font-weight: bold;
 }
 
+.filters 
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 2rem auto;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--oscuro);
+    border-radius: 12px;
+    max-width: 960px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filters label 
+{
+    font-weight: bold;
+    margin-right: 0.5rem;
+    margin-left: 1rem;
+    font-size: 0.95rem;
+    color: var(--gris);
+}
+
+.filters select 
+{
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--grisMedio);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background-color: var(--gris);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.filters select:hover 
+{
+    background-color: var(--gris);
+}
+
+.filters select:focus 
+{
+    border-color: var(--medio);
+    outline: none;
+    box-shadow: 0 0 0 2px var(--medio);
+}
+
 .pagination 
 {
     text-align: center;
@@ -107,6 +154,6 @@
 
 .pagination button:disabled 
 {
-    background-color: #999;
+    background-color: var(--gris);
     cursor: default;
 }

@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     {
         method: 'GET',
         headers: {
-
-                 
             'x-rapidapi-key': '43b86be099mshf40e25c8e81d0eep1b4abajsn251d504d2dce',
             'x-rapidapi-host': 'games-details.p.rapidapi.com'
         }
