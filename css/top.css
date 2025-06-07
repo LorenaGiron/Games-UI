@@ -90,7 +90,60 @@ h2
     color: var(--gris);
 }
 
+.modal-close 
+{
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: var(--gris);
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.modal-close:hover i 
+{
+    color: var(--claro);
+}
+
+.modal-img 
+{
+    width: 90%;
+}
+
 .modal-body strong 
 {
     color: var(--claro);
+}
+
+.modal-description 
+{
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--gris); 
+    max-height: 150px;      
+    overflow-y: auto;         
+    padding-right: 10px;      
+    white-space: pre-wrap;    
+    border-top: 1px solid var(--gris);
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
+.modal-description::-webkit-scrollbar 
+{
+  width: 6px;
+}
+
+.modal-description::-webkit-scrollbar-thumb 
+{
+  background-color: var(--gris);
+  border-radius: 10px;
+}
+
+.modal-description::-webkit-scrollbar-track 
+{
+  background-color: transparent;
 }

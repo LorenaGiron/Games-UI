@@ -136,6 +136,8 @@ async function loadGames() {
                 document.getElementById(section.elementId).previousElementSibling.style.display = "none";
             }
 
+            console.log(data);
+
         } catch (err) {
             console.error(`Error cargando juegos para ${section.title}:`, err);
         }
