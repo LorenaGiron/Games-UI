@@ -160,17 +160,15 @@
 
 /* Partículas */
 .particle-container {
-  position: fixed;
+  position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background: var(--fuerte);
   overflow: hidden;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  pointer-events: none;
+  padding-bottom: 100px;
 }
 
+/* Partículas individuales */
 .particle {
   position: absolute;
   background: rgba(255, 255, 255, 0.7);
@@ -182,6 +180,7 @@
     opacity 0.5s ease;
 }
 
+/* Efecto de brillo */
 .particle.glow {
   box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.9);
   transform: scale(1.5);
