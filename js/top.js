@@ -4,6 +4,7 @@ const today = new Date();
 const oneMonthAgo = new Date();
 oneMonthAgo.setMonth(today.getMonth() - 1);
 const formatDate = date => date.toISOString().split('T')[0];
+let searchTerm = "";
 
 const startDate = formatDate(oneMonthAgo);
 const endDate = formatDate(today);
