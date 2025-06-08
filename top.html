@@ -83,30 +83,32 @@
         </nav>
     </header>
 
-  <!-- Main content -->
-  <main class="container my-5 pt-5">
-    <h2 class="mb-4 text-center">Top Games</h2>
+    <div class="particle-container" id="particleContainer">
+        <!-- Main content -->
+        <main class="container my-5 pt-5">
+            <h2 class="mb-4 text-center">Top Games</h2>
 
-    <!-- Tabs/Pills navigation -->
-    <ul class="nav nav-pills justify-content-center mb-4" id="topGamesTabs" role="tablist">
-      <li class="nav-item" role="presentation"><button class="nav-link active" id="monthly-tab" data-bs-toggle="pill" data-bs-target="#monthly" type="button" role="tab">Monthly Top 10</button></li>
-      <li class="nav-item" role="presentation"><button class="nav-link" id="sales-tab" data-bs-toggle="pill" data-bs-target="#sales" type="button" role="tab">Top Sales</button></li>
-      <li class="nav-item" role="presentation"><button class="nav-link" id="rated-tab" data-bs-toggle="pill" data-bs-target="#rated" type="button" role="tab">Top Rated</button></li>
-      <li class="nav-item" role="presentation"><button class="nav-link" id="players-tab" data-bs-toggle="pill" data-bs-target="#players" type="button" role="tab">More Players</button></li>
-      <li class="nav-item" role="presentation"><button class="nav-link" id="added-tab" data-bs-toggle="pill" data-bs-target="#added" type="button" role="tab">Most Saved</button></li>
-      <li class="nav-item" role="presentation"><button class="nav-link" id="reviewed-tab" data-bs-toggle="pill" data-bs-target="#reviewed" type="button" role="tab">More Reviews</button></li>
-    </ul>
+            <!-- Tabs/Pills navigation -->
+            <ul class="nav nav-pills justify-content-center mb-4" id="topGamesTabs" role="tablist">
+            <li class="nav-item" role="presentation"><button class="nav-link active" id="monthly-tab" data-bs-toggle="pill" data-bs-target="#monthly" type="button" role="tab">Monthly Top 10</button></li>
+            <li class="nav-item" role="presentation"><button class="nav-link" id="sales-tab" data-bs-toggle="pill" data-bs-target="#sales" type="button" role="tab">Top Sales</button></li>
+            <li class="nav-item" role="presentation"><button class="nav-link" id="rated-tab" data-bs-toggle="pill" data-bs-target="#rated" type="button" role="tab">Top Rated</button></li>
+            <li class="nav-item" role="presentation"><button class="nav-link" id="players-tab" data-bs-toggle="pill" data-bs-target="#players" type="button" role="tab">More Players</button></li>
+            <li class="nav-item" role="presentation"><button class="nav-link" id="added-tab" data-bs-toggle="pill" data-bs-target="#added" type="button" role="tab">Most Saved</button></li>
+            <li class="nav-item" role="presentation"><button class="nav-link" id="reviewed-tab" data-bs-toggle="pill" data-bs-target="#reviewed" type="button" role="tab">More Reviews</button></li>
+            </ul>
 
-    <!-- Tabs content -->
-    <div class="tab-content" id="topGamesTabsContent" >
-      <div id="loading-spinner" class="text-center my-5"><i class="fas fa-spinner fa-spin fa-3x text-light"></i><p class="text-light mt-2">Loading TOP games... (⌐■_■) Loading like a boss!</p></div>
-      <div class="tab-pane fade show active" id="monthly" role="tabpanel"><h5 class="text-center mb-4">Discover the most popular games this month.</h5><div class="row" id="game-list"></div></div>
-      <div class="tab-pane fade" id="sales" role="tabpanel"><h5 class="text-center mb-4">Check out the best-selling games.</h5><div class="row" id="top-sales-list"></div></div>
-      <div class="tab-pane fade" id="rated" role="tabpanel"><h5 class="text-center mb-4">Games with the highest ratings.</h5><div class="row" id="top-rated-list"></div></div>
-      <div class="tab-pane fade" id="players" role="tabpanel"><h5 class="text-center mb-4">Games with the most active players.</h5><div class="row" id="most-played-list"></div></div>
-      <div class="tab-pane fade" id="added" role="tabpanel"><h5 class="text-center mb-4">Most saved games by users.</h5><div class="row" id="most-added-list"></div></div>
-      <div class="tab-pane fade" id="reviewed" role="tabpanel"><h5 class="text-center mb-4">Games with the most reviews.</h5><div class="row" id="most-reviewed-list"></div></div></div>
-  </main>
+            <!-- Tabs content -->
+            <div class="tab-content" id="topGamesTabsContent" >
+            <div id="loading-spinner" class="text-center my-5"><i class="fas fa-spinner fa-spin fa-3x text-light"></i><p class="text-light mt-2">Loading TOP games... (⌐■_■) Loading like a boss!</p></div>
+            <div class="tab-pane fade show active" id="monthly" role="tabpanel"><h5 class="text-center mb-4">Discover the most popular games this month.</h5><div class="row" id="game-list"></div></div>
+            <div class="tab-pane fade" id="sales" role="tabpanel"><h5 class="text-center mb-4">Check out the best-selling games.</h5><div class="row" id="top-sales-list"></div></div>
+            <div class="tab-pane fade" id="rated" role="tabpanel"><h5 class="text-center mb-4">Games with the highest ratings.</h5><div class="row" id="top-rated-list"></div></div>
+            <div class="tab-pane fade" id="players" role="tabpanel"><h5 class="text-center mb-4">Games with the most active players.</h5><div class="row" id="most-played-list"></div></div>
+            <div class="tab-pane fade" id="added" role="tabpanel"><h5 class="text-center mb-4">Most saved games by users.</h5><div class="row" id="most-added-list"></div></div>
+            <div class="tab-pane fade" id="reviewed" role="tabpanel"><h5 class="text-center mb-4">Games with the most reviews.</h5><div class="row" id="most-reviewed-list"></div></div></div>
+        </main>
+    </div>
 
   <!-- Footer -->
  <footer>
