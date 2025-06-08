@@ -13,12 +13,12 @@ const sections = [
     {
         title: "Monthly top 10",
         elementId: "game-list",
-        ordering: "-playtime",  // Cambia el criterio para destacar juegos jugados activamente
+        ordering: "-playtime",
         dateRange: `${startDate},${endDate}`,
         page_size: 10,
         displayFields: game => `
-            <p class="card-text">Similar games: ${game.suggestions_count}</p>
-            <p class="card-text">Released: ${game.released}</p>
+            <p class="card-text"><i class="fas fa-gamepad me-2"></i>Similar games: ${game.suggestions_count}</p>
+            <p class="card-text"><i class="fas fa-calendar-alt me-2"></i>  ${game.released}</p>
         `,
         filter: game => game.playtime > 0 && game.reviews_count > 0
     },
@@ -28,7 +28,7 @@ const sections = [
         ordering: "-added",
         page_size: 8,
         displayFields: game => `
-            <p class="card-text">Saved by: ${game.added} users</p>
+           <p class="card-text"><i class="fas fa-bookmark me-2"></i>Saved by: ${game.added} users</p>
         `
     },
     {
@@ -37,8 +37,8 @@ const sections = [
         ordering: "-rating",
         page_size: 8,
         displayFields: game => `
-            <p class="card-text">Rating: ${game.rating} </p>
-            <p class="card-text">Rating Top: ${game.rating_top}</p>
+        <p class="card-text"><i class="fas fa-star me-2"></i> Rating: ${game.rating}</p>
+        <p class="card-text"><i class="fas fa-medal me-2"></i> Rating Top: ${game.rating_top}</p>
         `
     },
     {
@@ -47,7 +47,7 @@ const sections = [
         ordering: "-rating_top",
         page_size: 8,
         displayFields: game => `
-        <p class="card-text">Popularity: ${game.rating_top} / 5</p>
+            <p class="card-text"><i class="fas fa-chart-line me-2"></i> Popularity: ${game.rating_top} / 5</p>
         `
     },
     {
@@ -56,7 +56,7 @@ const sections = [
         ordering: "-added",
         page_size: 8,
         displayFields: game => `
-        <p class="card-text">Added to lists: ${game.added}</p>
+            <p class="card-text"><i class="fas fa-list-check me-2"></i> Added to list: ${game.added}</p>
         `
     },
     {
@@ -65,33 +65,34 @@ const sections = [
         ordering: "-metacritic",
         page_size: 8,
         displayFields: game => `
-            <p class="card-text">Reviews: ${game.metacritic || 'N/A'}</p>
+        <p class="card-text"><i class="fas fa-comments me-2"></i> Reviews: ${game.metacritic || 'N/A'}</p>
         `
     }
 ];
 
-// Tarjeta de juego dinámica
-function createGameCard(game, contentHTML) {
+function createGameCard(game, contentHTML, rankingBadge = "") {
     return `
         <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm">
-            <img src="${game.background_image}" class="card-img-top" alt="${game.name}">
-            <div class="card-body d-flex flex-column justify-content-between">
-            <div>
-                <h5 class="card-title">${game.name}</h5>
-                ${contentHTML}
+            <div class="card h-100 shadow-sm position-relative hover-effect">
+                ${rankingBadge}
+                <img src="${game.background_image}" class="card-img-top" alt="${game.name}">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                        <h5 class="card-title">${game.name}</h5>
+                        ${contentHTML}
+                    </div>
+                    <button class="btn btn-primary mt-3" onclick="window.location.href='detallesTop.html?id=${game.id}'">
+                        Details
+                    </button>       
+                </div>
             </div>
-                <button class="btn btn-primary mt-3" onclick="window.location.href='detallesTop.html?id=${game.id}'">
-                    See info
-                </button>       
-            </div>
-        </div>
         </div>
     `;
 }
 
-// Cargar y renderizar juegos en cada sección
 async function loadGames() {
+    const spinner = document.getElementById("loading-spinner");
+    spinner.style.display = "block"; 
 
     for (const section of sections) {
         try {
@@ -109,112 +110,41 @@ async function loadGames() {
             const container = document.getElementById(section.elementId);
             container.innerHTML = "";
 
-            data.results.forEach(game => {
+            data.results.forEach((game, index) => {
                 if (!game.background_image) return;
 
                 const gameName = game.name.toLowerCase();
 
                 if (!searchTerm || gameName.includes(searchTerm)) {
                     const extraInfo = section.displayFields(game);
+                    const medal = `#${index + 1}`;
+                    const rankingBadge = `<span class="ranking-badge position-absolute top-0 start-0 m-2">${medal}</span>`;
 
-                    // Agregamos texto indicando a qué grupo pertenece si hay búsqueda
-                    let cardHTML = createGameCard(game, extraInfo);
+                    let cardHTML = createGameCard(game, extraInfo, rankingBadge);
+
                     if (searchTerm) {
                         cardHTML = cardHTML.replace(
-                        '<div class="card-body d-flex flex-column justify-content-between">',
-                        `<div class="card-body d-flex flex-column justify-content-between">
-                            <p class="badge bg-info mb-2">Group: ${section.title}</p>`
+                            '<div class="card-body d-flex flex-column justify-content-between">',
+                            `<div class="card-body d-flex flex-column justify-content-between">
+                                <p class="badge bg-info mb-2">Group: ${section.title}</p>`
                         );
                     }
 
-                    container.innerHTML += cardHTML;
+                    container.innerHTML += cardHTML; 
+                    spinner.style.display = "none"; 
                 }
             });
 
-            // Oculta secciones vacías si hay búsqueda
             if (searchTerm && container.innerHTML.trim() === "") {
                 document.getElementById(section.elementId).previousElementSibling.style.display = "none";
             }
-
-            console.log(data);
 
         } catch (err) {
             console.error(`Error cargando juegos para ${section.title}:`, err);
         }
     }
+
+   
 }
 
 document.addEventListener("DOMContentLoaded", loadGames);
-
-async function showGameInfo(game) {
-  const modalTitle = document.getElementById("gameModalTitle");
-  const modalImage = document.getElementById("gameModalImage");
-  const modalDescription = document.getElementById("gameModalDescription");
-  const modalPlatforms = document.getElementById("gameModalPlatforms");
-  const modalGenres = document.getElementById("gameModalGenres");
-  const modalMetacritic = document.getElementById("gameModalMetacritic");
-
-  // Muestra loading temporal mientras se carga la data
-  modalTitle.textContent = game.name;
-  modalImage.src = game.background_image;
-  modalImage.alt = game.name;
-  modalDescription.textContent = "Loading description...";
-  modalPlatforms.textContent = "Loading...";
-  modalGenres.textContent = "Loading...";
-  modalMetacritic.textContent = "Loading...";
-
-  const modal = new bootstrap.Modal(document.getElementById('gameInfoModal'));
-  modal.show();
-
-  try {
-    const res = await fetch(`https://api.rawg.io/api/games/${game.id}?key=${apiKey}`);
-    const fullGame = await res.json();
-
-    modalDescription.textContent = fullGame.description_raw || "Descripción no disponible.";
-    modalPlatforms.textContent = fullGame.platforms?.map(p => p.platform.name).join(', ') || "No disponible";
-    modalGenres.textContent = fullGame.genres?.map(g => g.name).join(', ') || "No disponible";
-    modalMetacritic.textContent = fullGame.metacritic ?? "N/A";
-  } catch (error) {
-    modalDescription.textContent = "Error al cargar la descripción.";
-    modalPlatforms.textContent = "Error";
-    modalGenres.textContent = "Error";
-    modalMetacritic.textContent = "Error";
-    console.error("Error al obtener detalles del juego:", error);
-  }
-}
-
-async function showGameInfoById(gameId, gameName) {
-  const modalTitle = document.getElementById("gameModalTitle");
-  const modalImage = document.getElementById("gameModalImage");
-  const modalDescription = document.getElementById("gameModalDescription");
-  const modalPlatforms = document.getElementById("gameModalPlatforms");
-  const modalGenres = document.getElementById("gameModalGenres");
-  const modalMetacritic = document.getElementById("gameModalMetacritic");
-
-  // Mostrar loading mientras se busca
-  modalTitle.textContent = gameName;
-  modalImage.src = "";
-  modalImage.alt = gameName;
-  modalDescription.textContent = "Loading description...";
-  modalPlatforms.textContent = "Loading...";
-  modalGenres.textContent = "Loading...";
-  modalMetacritic.textContent = "Loading...";
-
-  const modal = new bootstrap.Modal(document.getElementById('gameInfoModal'));
-  modal.show();
-
-  try {
-    const res = await fetch(`https://api.rawg.io/api/games/${gameId}?key=${apiKey}`);
-    const game = await res.json();
-
-    modalImage.src = game.background_image;
-    modalImage.alt = game.name;
-    modalDescription.textContent = game.description_raw || "Description not available";
-    modalPlatforms.textContent = game.platforms?.map(p => p.platform.name).join(', ') || "Not available";
-    modalGenres.textContent = game.genres?.map(g => g.name).join(', ') || "Not available";
-    modalMetacritic.textContent = game.metacritic ?? "N/A";
-  } catch (error) {
-    console.error("Error al obtener detalles del juego:", error);
-    modalDescription.textContent = "Error al cargar información.";
-  }
-}
