@@ -183,6 +183,11 @@
     flex: 0 0 400px;
 }
 
+.precio 
+{
+    color: var(--gris);
+}
+
 .arrow 
 {
     position: absolute;
@@ -218,6 +223,12 @@
 .arrow.right 
 { 
     right: 15px; 
+}
+
+.arrow.hidden 
+{
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Fondo Mr.Games */
