@@ -11,7 +11,7 @@ const url = 'https://games-details.p.rapidapi.com/media/screenshots/730?limit=20
 const options = {
   method: 'GET',
   headers: {
-    'x-rapidapi-key': 'fa076bb285msh7695b9780cdfbd3p1efd96jsn61537f61b091',
+    'x-rapidapi-key': '0039500bbbmshf36332034469d5cp110907jsnb43b3ac05f4d',
     'x-rapidapi-host': 'games-details.p.rapidapi.com'
   }
 };
@@ -71,12 +71,14 @@ async function cargarJuegos() {
     const card = document.createElement("div");
     card.className = "card bg-dark text-white card-game";
     card.innerHTML = `
-      <img src="${juego.image}" class="card-img-top" alt="${juego.name}">
-      <div class="card-body">
-        <h5 class="card-title">${juego.name}</h5>
-        <p class="card-text">Price: ${juego.price}</p>
-        <a href="./detalles.html" class="btn btn-outline-light btn-sm" onclick="guardarID('${juego.id}')">Details</a>
-      </div>
+        <div class="card-inner">
+            <img src="${juego.image}" class="card-img-top" alt="${juego.name}">
+            <div class="card-body">
+                <h5 class="card-title">${juego.name}</h5>
+                <p class="card-text">Price: ${juego.price}</p>
+                <a href="./detalles.html" class="btn btn-outline-light btn-sm" onclick="guardarID('${juego.id}')">Details</a>
+            </div>
+        </div>
     `;
     container.appendChild(card);
   });
@@ -107,12 +109,14 @@ async function cargarMasJuegos() {
     const card = document.createElement("div");
     card.className = "card bg-dark text-white card-game";
     card.innerHTML = `
-      <img src="${juego.image}" class="card-img-top" alt="${juego.name}">
-      <div class="card-body">
-        <h5 class="card-title">${juego.name}</h5>
-        <p class="card-text">Price: ${juego.price}</p>
-        <a href="./detalles.html" class="btn btn-outline-light btn-sm" onclick="guardarID('${juego.id}')">Details</a>
-      </div>
+        <div class="card-inner">
+            <img src="${juego.image}" class="card-img-top" alt="${juego.name}">
+            <div class="card-body">
+                <h5 class="card-title">${juego.name}</h5>
+                <p class="card-text">Price: ${juego.price}</p>
+                <a href="./detalles.html" class="btn btn-outline-light btn-sm" onclick="guardarID('${juego.id}')">Details</a>
+            </div>
+        </div>
     `;
     container.appendChild(card);
   });
@@ -134,18 +138,32 @@ function activarFlechasCarruselRecomendados() {
 }
 
 async function cargarCollage() {
-  const container = document.getElementById("collage-container");
- 
-  const juegos = await fetchMultipleSearches();
-  container.innerHTML = '';
+    const container = document.getElementById("collage-container");
+    const juegos = await fetchMultipleSearches();
+    container.innerHTML = '';
 
-  juegos.slice(0, 10).forEach(juego => {
-    const img = document.createElement("img");
-    img.src = juego.image;
-    img.alt = juego.name;
-    container.appendChild(img);
-  });
+    juegos.slice(0, 50).forEach((juego, index) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'diamond-wrapper';
+
+        // intercalar las filas
+        if (Math.floor(index / 5) % 2 !== 0) {
+        wrapper.classList.add('offset');
+        }
+
+        const diamond = document.createElement('div');
+        diamond.className = 'diamond';
+
+        const img = document.createElement('img');
+        img.src = juego.image;
+        img.alt = juego.name;
+
+        diamond.appendChild(img);
+        wrapper.appendChild(diamond);
+        container.appendChild(wrapper);
+    });
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", () => {
