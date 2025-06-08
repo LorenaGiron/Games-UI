@@ -47,13 +47,14 @@ async function renderGenres() {
             console.error("No se encontraron los géneros en la respuesta");
             return;
         }
-
+        
         const genresContainer = document.getElementById('genres-list');
         genresContainer.innerHTML = `<h2 class="mb-5 mt-5 text-center text-light">Game Genres</h2>`;
         const row = document.createElement('div');
         row.className = 'row g-4';
 
         gameDetails.tags.forEach((genre, index) => {
+           
             const col = document.createElement('div');
             col.className = 'col-11 col-sm-6 col-md-4 col-lg-3';
 
@@ -99,6 +100,11 @@ async function renderGenres() {
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.genre-card').forEach(card => observer.observe(card));
+
+         const loadingSpinner = document.getElementById('loading-spinner');
+        if (loadingSpinner) {
+            loadingSpinner.style.display = 'none';
+        }
 
     } catch (error) {
         console.error('Error al obtener los detalles del juego:', error);
