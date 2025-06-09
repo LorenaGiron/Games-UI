@@ -50,13 +50,12 @@ h2
     color: var(--gris);
 }
 
-.top-link .nav-pills
+.top-link 
 {
     margin-top: 15px;
     align-self: flex-start;
     color: var(--gris);
     text-decoration: none;
-    margin-bottom: 5px;
 }
 
 .top-link .nav-pills:hover 
