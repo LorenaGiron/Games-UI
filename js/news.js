@@ -9,7 +9,7 @@ const fetchNews = async () => {
     const options = {
         method: 'GET',
         headers: {
-            'x-rapidapi-key': '1eaa470d96msh9a134e90ef0b98ap146897jsn112e62225d2e',
+          	'x-rapidapi-key': '44df0cede8msh6c81accb6f72542p1e343djsn7ab6aa5cb868',
             'x-rapidapi-host': 'epic-games-store.p.rapidapi.com'
         }
     };

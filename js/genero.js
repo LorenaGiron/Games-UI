@@ -17,7 +17,7 @@ shuffleBtn.innerHTML = `<i class="fas fa-shuffle"></i>`;
   const options = {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': '0272d01fe9mshf576bfdf1ca2482p13f58bjsnbc5c66037bba',
+      'x-rapidapi-key': '65c9f687acmsh1f46c6ec6f2f10ap14d6c5jsnf43a816b1de5',
       'x-rapidapi-host': 'games-details.p.rapidapi.com'
     }
   };

@@ -25,7 +25,7 @@ searchForms.forEach(form => {
         const options = {
             method: 'GET',
             headers: {
-            'x-rapidapi-key': '0272d01fe9mshf576bfdf1ca2482p13f58bjsnbc5c66037bba',
+                'x-rapidapi-key': 'c1c41c3da2msh533fd5fbf6ed157p1a2a88jsnc6c3f7c7b442',
                 'x-rapidapi-host': 'games-details.p.rapidapi.com'
             }
         };
