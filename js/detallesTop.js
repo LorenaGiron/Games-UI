@@ -19,7 +19,7 @@ async function loadGameDetails() {
         
         // Link del sitio
         if (game.website) {
-            document.querySelector('.link').innerHTML = `<a href="${game.website}" target="_blank">${game.website}</a>`;
+            document.querySelector('.link').innerHTML = `Web site: <a href="${game.website}" target="_blank">${game.website}</a>`;
         } else {
             document.querySelector('.link').textContent = 'No website available';
         }

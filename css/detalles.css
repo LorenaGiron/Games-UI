@@ -100,6 +100,18 @@
     color: white;
 }
 
+.link a
+{
+    color: var(--gris) !important;
+    text-decoration: none !important;
+}
+
+.link a:hover
+{
+    color: var(--claro) !important;
+    text-decoration: underline !important;
+}
+
 /* PARTÍCULAS */
 .particle-container {
   position: relative;

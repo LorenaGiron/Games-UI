@@ -83,7 +83,7 @@
 }
 .review {
     background-color: var(--fuerte);
-     color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.7);
     border-radius: 10px;
     padding: 1rem;
     margin-bottom: 1rem;
@@ -98,6 +98,18 @@
 
 .title{
     color: white;
+}
+
+.link a
+{
+    color: var(--gris) !important;
+    text-decoration: none !important;
+}
+
+.link a:hover
+{
+    color: var(--claro) !important;
+    text-decoration: underline !important;
 }
 
 /* PARTÍCULAS */
