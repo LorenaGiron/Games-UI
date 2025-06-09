@@ -1,102 +1,111 @@
 function mostrarSpinner(container) {
-  container.innerHTML = `
-    <div class="spinner-container text-center my-5">
-      <i class="fas fa-spinner fa-spin fa-3x text-light"></i>
-      <p class="mt-3 text-light">Rolling dice for awesome games... (ಠ‿↼)</p>
-    </div>
-  `;
+    container.innerHTML = `
+        <div class="spinner-container text-center my-5">
+        <i class="fas fa-spinner fa-spin fa-3x text-light"></i>
+        <p class="mt-3 text-light">Rolling dice for awesome games... (ಠ‿↼)</p>
+        </div>
+    `;
 }
 
 const url = 'https://games-details.p.rapidapi.com/media/screenshots/730?limit=20&offset=0';
 const options = {
-  method: 'GET',
-  headers: {
-    'x-rapidapi-key': '0039500bbbmshf36332034469d5cp110907jsnb43b3ac05f4d',
-    'x-rapidapi-host': 'games-details.p.rapidapi.com'
-  }
+    method: 'GET',
+    headers: {
+        'x-rapidapi-key': '0039500bbbmshf36332034469d5cp110907jsnb43b3ac05f4d',
+        'x-rapidapi-host': 'games-details.p.rapidapi.com'
+    }
 };
 
 const letrasDisponibles = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
 function obtenerLetrasAlAzar(cantidad = 3) {
-  const letrasSeleccionadas = new Set();
-  while (letrasSeleccionadas.size < cantidad) {
-    const indice = Math.floor(Math.random() * letrasDisponibles.length);
-    letrasSeleccionadas.add(letrasDisponibles[indice]);
-  }
-  return Array.from(letrasSeleccionadas);
+    const letrasSeleccionadas = new Set();
+
+    while (letrasSeleccionadas.size < cantidad) 
+    {
+        const indice = Math.floor(Math.random() * letrasDisponibles.length);
+        letrasSeleccionadas.add(letrasDisponibles[indice]);
+    }
+
+    return Array.from(letrasSeleccionadas);
 }
 
-async function fetchMultipleSearches() {
-  const letrasBusqueda = obtenerLetrasAlAzar(3);
-  console.log('Letras usadas para búsqueda:', letrasBusqueda);
+async function fetchMultipleSearches() 
+{
+    const letrasBusqueda = obtenerLetrasAlAzar(3);
+    console.log('Letras usadas para búsqueda:', letrasBusqueda);
 
-  const juegosMap = new Map();
+    const juegosMap = new Map();
 
-  for (const letra of letrasBusqueda) {
-    const url = `https://games-details.p.rapidapi.com/search?sugg=${letra}`;
-    try {
-      const response = await fetch(url, options);
-      const result = await response.json();
+    for (const letra of letrasBusqueda) 
+    {
+        const url = `https://games-details.p.rapidapi.com/search?sugg=${letra}`;
+        try 
+        {
+            const response = await fetch(url, options);
+            const result = await response.json();
 
-      if (response.status === 200 && result.message === "success") {
-        const juegos = result.data.search;
-        juegos.forEach(juego => {
-          if (!juegosMap.has(juego.name)) {
-            juegosMap.set(juego.name, juego);
-          }
-        });
-      } else {
-        console.error(`Error en la respuesta de la API para letra "${letra}":`, result);
-      }
-    } catch (error) {
-      console.error(`Error al obtener juegos para letra "${letra}":`, error);
+            if (response.status === 200 && result.message === "success") 
+            {
+                const juegos = result.data.search;
+                juegos.forEach(juego => 
+                {
+                    if (!juegosMap.has(juego.name)) {
+                        juegosMap.set(juego.name, juego);
+                    }
+                });
+            } else {
+                console.error(`Error en la respuesta de la API para letra "${letra}":`, result);
+            }
+        } catch (error) {
+        console.error(`Error al obtener juegos para letra "${letra}":`, error);
+        }
     }
-  }
 
-  return Array.from(juegosMap.values()).slice(0, 10);
+    return Array.from(juegosMap.values()).slice(0, 10);
 }
 
 function guardarID(id) {
-  localStorage.setItem('juegoID', id);
+    localStorage.setItem('juegoID', id);
 }
 
 async function cargarJuegos() {
-  const container = document.getElementById("populares-container");
-  mostrarSpinner(container);
-  const juegos = await fetchMultipleSearches();
-  container.innerHTML = '';
+    const container = document.getElementById("populares-container");
+    mostrarSpinner(container);
+    const juegos = await fetchMultipleSearches();
+    container.innerHTML = '';
 
-  juegos.forEach(juego => {
-    const card = document.createElement("div");
-    card.className = "card bg-dark text-white card-game";
-    card.innerHTML = `
-        <div class="card-inner">
-            <img src="${juego.image}" class="card-img-top" alt="${juego.name}">
-            <div class="card-body">
-                <h5 class="card-title">${juego.name}</h5>
-                <p class="card-text">Price: ${juego.price}</p>
-                <a href="./detalles.html" class="btn btn-outline-light btn-sm" onclick="guardarID('${juego.id}')">Details</a>
+    juegos.forEach(juego => {
+        const card = document.createElement("div");
+        card.className = "card bg-dark text-white card-game";
+        card.innerHTML = `
+            <div class="card-inner">
+                <img src="${juego.image}" class="card-img-top" alt="${juego.name}">
+                <div class="card-body">
+                    <h5 class="card-title">${juego.name}</h5>
+                    <p class="card-text precio">Price: ${juego.price}</p>
+                    <a href="./detalles.html" class="btn btn-outline-light btn-sm" onclick="guardarID('${juego.id}')">Details</a>
+                </div>
             </div>
-        </div>
-    `;
-    container.appendChild(card);
-  });
+        `;
+        container.appendChild(card);
+    });
 }
 
-function activarFlechasCarrusel() {
-  const container = document.getElementById("populares-container");
-  const left = document.querySelector(".arrow.left");
-  const right = document.querySelector(".arrow.right");
-  const scrollAmount = 380;
+function activarFlechasCarrusel() 
+{
+    const container = document.getElementById("populares-container");
+    const left = document.querySelector(".arrow.left");
+    const right = document.querySelector(".arrow.right");
+    const scrollAmount = 430;
 
-  left.addEventListener("click", () => {
-    container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-  });
+    left.addEventListener("click", () => {
+        container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
 
-  right.addEventListener("click", () => {
-    container.scrollBy({ left: scrollAmount, behavior: "smooth" });
-  });
+    right.addEventListener("click", () => {
+        container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
 }
 
 async function cargarMasJuegos() {
@@ -113,7 +122,7 @@ async function cargarMasJuegos() {
             <img src="${juego.image}" class="card-img-top" alt="${juego.name}">
             <div class="card-body">
                 <h5 class="card-title">${juego.name}</h5>
-                <p class="card-text">Price: ${juego.price}</p>
+                <p class="card-text precio">Price: ${juego.price}</p>
                 <a href="./detalles.html" class="btn btn-outline-light btn-sm" onclick="guardarID('${juego.id}')">Details</a>
             </div>
         </div>
@@ -122,47 +131,65 @@ async function cargarMasJuegos() {
   });
 }
 
-function activarFlechasCarruselRecomendados() {
-  const container = document.getElementById("recomendados-container");
-  const left = document.getElementById("arrow-left-more");
-  const right = document.getElementById("arrow-right-more");
-  const scrollAmount = 380;
+function activarFlechasCarruselRecomendados() 
+{
+    const container = document.getElementById("recomendados-container");
+    const left = document.getElementById("arrow-left-more");
+    const right = document.getElementById("arrow-right-more");
+    const scrollAmount = 430;
 
-  left.addEventListener("click", () => {
-    container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-  });
+    left.addEventListener("click", () => {
+        container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
 
-  right.addEventListener("click", () => {
-    container.scrollBy({ left: scrollAmount, behavior: "smooth" });
-  });
-}
-
-async function cargarCollage() {
-    const container = document.getElementById("collage-container");
-    const juegos = await fetchMultipleSearches();
-    container.innerHTML = '';
-
-    juegos.slice(0, 50).forEach((juego, index) => {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'diamond-wrapper';
-
-        // intercalar las filas
-        if (Math.floor(index / 5) % 2 !== 0) {
-        wrapper.classList.add('offset');
-        }
-
-        const diamond = document.createElement('div');
-        diamond.className = 'diamond';
-
-        const img = document.createElement('img');
-        img.src = juego.image;
-        img.alt = juego.name;
-
-        diamond.appendChild(img);
-        wrapper.appendChild(diamond);
-        container.appendChild(wrapper);
+    right.addEventListener("click", () => {
+        container.scrollBy({ left: scrollAmount, behavior: "smooth" });
     });
 }
+
+function setupCarouselScroll(containerId, leftButtonSelector, rightButtonSelector, scrollAmount = 600) 
+{
+    const container = document.getElementById(containerId);
+    const leftButton = document.querySelector(leftButtonSelector);
+    const rightButton = document.querySelector(rightButtonSelector);
+
+    if (!container || !leftButton || !rightButton) return;
+
+    // Manejadores de scroll
+    leftButton.addEventListener('click', () => {
+        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    rightButton.addEventListener('click', () => {
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    // Mostrar/ocultar flechas según posición del scroll
+    function updateArrowVisibility() {
+        if (container.scrollLeft <= 0) {
+            leftButton.classList.add('hidden');
+        } else {
+            leftButton.classList.remove('hidden');
+        }
+
+        if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 5) {
+            rightButton.classList.add('hidden');
+        } else {
+            rightButton.classList.remove('hidden');
+        }
+    }
+
+    // Llamar al inicio y en cada scroll
+    updateArrowVisibility();
+    container.addEventListener('scroll', updateArrowVisibility);
+
+    // También después de que se carguen dinámicamente los elementos
+    const observer = new MutationObserver(updateArrowVisibility);
+    observer.observe(container, { childList: true });
+}
+
+setupCarouselScroll("populares-container", ".trending-section .arrow.left", ".trending-section .arrow.right");
+setupCarouselScroll("recomendados-container", "#arrow-left-more", "#arrow-right-more");
 
 
 document.addEventListener("DOMContentLoaded", () => {

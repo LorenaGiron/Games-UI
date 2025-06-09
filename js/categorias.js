@@ -36,7 +36,7 @@ async function renderGenres() {
         return icons[genre] || icons.default;
     }
 
-    const customColors = ['var(--medio)', 'var(--fuerte)', 'var(--claro)','var(--gris)','var(--grisMedio)'];
+    const customColors = ['var(--medio)', 'var(--fuerte)', 'var(--claro)','var(--grisMedio)','var(--grisOscuro)'];
 
     try {
         const response = await fetch(url, options);
