@@ -117,8 +117,8 @@ shuffleBtn.innerHTML = `<i class="fas fa-shuffle"></i>`;
             <img src="${imageUrl}" class="card-img-top" alt="${gameName}">
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">${gameName}</h5>
-              <p class="card-text">Price: ${price}</p>
-              <a href="./detalles.html" class="btn btn-outline-light btn-sm mt-auto" onclick="guardarID('${gameId}')">Details</a>
+              <p class="card-text precio">Price: ${price}</p>
+              <a href="./detalles.html" class="btn btn-gen btn-outline-light btn-sm mt-auto" onclick="guardarID('${gameId}')">Details</a>
             </div>
           </div>
         `;
