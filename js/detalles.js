@@ -1,7 +1,7 @@
 const options = {
     method: 'GET',
     headers: {
-        'x-rapidapi-key': 'fa076bb285msh7695b9780cdfbd3p1efd96jsn61537f61b091',
+        'x-rapidapi-key': '65c9f687acmsh1f46c6ec6f2f10ap14d6c5jsnf43a816b1de5',
         'x-rapidapi-host': 'games-details.p.rapidapi.com'
     }
 };
