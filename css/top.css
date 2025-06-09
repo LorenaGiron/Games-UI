@@ -17,7 +17,7 @@ h2
 {
     transform: translateY(-5px);
     transition: transform 0.2s ease;
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.932)!important;
+    box-shadow: 0 4px 20px rgba(255,255,255,0.2) !important;
 }
 
 .card-img-top 
@@ -26,7 +26,6 @@ h2
     height: 180px;
     object-fit: cover;
 }
-
 
 .card-body 
 {
@@ -51,15 +50,16 @@ h2
     color: var(--gris);
 }
 
-.top-link 
+.top-link .nav-pills
 {
     margin-top: 15px;
     align-self: flex-start;
     color: var(--gris);
     text-decoration: none;
+    margin-bottom: 5px;
 }
 
-.top-link:hover 
+.top-link .nav-pills:hover 
 {
     text-decoration: underline;
     font-weight: bold;
@@ -74,13 +74,13 @@ h2
     border-radius: 6px;
 }
 
-
-
-.btn.btn-primary.mt-3 {
+.btn.btn-primary.mt-3 
+{
     background-color: #373737; /* Fondo gris oscuro */
     border: 2px solid white;   /* Borde blanco */
     color: white;              /* Texto blanco */
     transition: background-color 0.3s, color 0.3s;
+    width: 5rem;
 }
 
 .btn.btn-primary.mt-3:hover {
